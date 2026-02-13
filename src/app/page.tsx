@@ -1,294 +1,361 @@
 'use client'
 
-import { Box, Container, Heading, Text, Stack, Grid, HStack, Badge } from "@chakra-ui/react"
-import Hero from "@/components/Hero"
-import ProjectCard from "@/components/ProjectCard"
-import CTAButton from "@/components/CTAButton"
-import { HiLightningBolt, HiChartBar, HiClock, HiShieldCheck } from "react-icons/hi"
-import type { Project } from "@/types"
-
-const topProjects: Project[] = [
-  {
-    id: "1",
-    title: "E-Commerce Platform Redesign",
-    category: "Web Application",
-    description: "Complete overhaul of an e-commerce platform with AI-powered product recommendations and real-time inventory management.",
-    technologies: ["Next.js", "TypeScript", "OpenAI", "PostgreSQL", "Stripe"],
-    results: [
-      { metric: "conversion increase", value: "47%" },
-      { metric: "page load improvement", value: "2.3s" },
-    ],
-  },
-  {
-    id: "2",
-    title: "AI Content Generation System",
-    category: "AI/ML Application",
-    description: "Intelligent content generation platform leveraging GPT-4 and Claude for multi-format content creation with brand voice consistency.",
-    technologies: ["Python", "LangChain", "Claude API", "Redis", "React"],
-    results: [
-      { metric: "time saved per article", value: "85%" },
-      { metric: "content quality score", value: "9.2/10" },
-    ],
-  },
-  {
-    id: "3",
-    title: "Real-Time Analytics Dashboard",
-    category: "SaaS Platform",
-    description: "Enterprise analytics platform with predictive insights, custom reporting, and automated anomaly detection.",
-    technologies: ["Vue.js", "Python", "TensorFlow", "MongoDB", "WebSockets"],
-    results: [
-      { metric: "data processing speed", value: "10x" },
-      { metric: "user engagement", value: "+156%" },
-    ],
-  },
-]
-
-const benefits = [
-  {
-    icon: HiLightningBolt,
-    title: "Rapid Development",
-    description: "Leveraging AI-assisted development to deliver projects 3x faster without compromising quality.",
-  },
-  {
-    icon: HiChartBar,
-    title: "Measurable Results",
-    description: "Data-driven approach with clear metrics and KPIs. Track ROI from day one.",
-  },
-  {
-    icon: HiClock,
-    title: "On-Time Delivery",
-    description: "97% on-time delivery rate. We respect your timeline and budget constraints.",
-  },
-  {
-    icon: HiShieldCheck,
-    title: "Enterprise Quality",
-    description: "Production-ready code with comprehensive testing, security audits, and documentation.",
-  },
-]
+import { Box, Grid, Stack, Text, HStack } from "@chakra-ui/react"
+import Link from "next/link"
+import { HiTerminal, HiLightningBolt, HiChartBar, HiClock, HiShieldCheck, HiArrowRight } from "react-icons/hi"
 
 export default function Home() {
   return (
-    <Box>
+    <Box minH="100vh" background="var(--cli-bg)" color="var(--cli-fg)">
       {/* Hero Section */}
-      <Hero
-        title="AI-Powered Development Agency"
-        subtitle="Transform your ideas into production-ready applications with cutting-edge AI technology and expert development. Ship faster, scale smarter."
-        primaryCTA={{
-          text: "Book Discovery Call",
-          href: "/contact",
-        }}
-        secondaryCTA={{
-          text: "View Our Work",
-          href: "/lookbook",
-        }}
-      />
+      <Box
+        py={{ base: "var(--space-20)", md: "var(--space-32)" }}
+        position="relative"
+        overflow="hidden"
+        borderBottom="var(--border-width-thick) solid var(--cli-border)"
+      >
+        {/* Scanline effect background */}
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          opacity={0.02}
+          pointerEvents="none"
+          background="repeating-linear-gradient(0deg, var(--cli-fg), var(--cli-fg) 1px, transparent 1px, transparent 2px)"
+        />
 
-      {/* Top Performing Projects Section */}
-      <Box py={{ base: 16, md: 24 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
-            <Box textAlign="center">
-              <Badge colorPalette="brand" size="lg" mb={4}>
-                Featured Work
-              </Badge>
-              <Heading size={{ base: "xl", md: "2xl" }} mb={4}>
-                Top Performing Web Apps
-              </Heading>
+        <Box className="container" position="relative" zIndex={1}>
+          <Stack gap="var(--space-6)" maxW="4xl" mx="auto" textAlign="center">
+            {/* Terminal prompt */}
+            <HStack justify="center" gap="var(--space-2)">
+              <HiTerminal size={20} color="var(--cli-primary)" />
+              <Text fontFamily="var(--font-mono)" fontSize="var(--text-sm)" color="var(--cli-comment)">
+                user@ai-agency:~$
+              </Text>
+            </HStack>
+
+            {/* Main Headline */}
+            <Box>
               <Text
-                fontSize={{ base: "md", md: "lg" }}
-                color="gray.600"
-                _dark={{ color: "gray.400" }}
-                maxW="2xl"
-                mx="auto"
+                as="h1"
+                fontFamily="var(--font-display)"
+                fontSize={{ base: "var(--text-4xl)", md: "var(--text-6xl)" }}
+                fontWeight="var(--font-black)"
+                lineHeight="var(--leading-tight)"
+                color="var(--cli-fg)"
+                mb="var(--space-4)"
               >
-                Real projects, real results. See how we've helped businesses achieve their goals
-                with innovative AI-powered solutions.
+                <Text as="span" color="var(--cli-primary)">$</Text> ai-dev-agency
+                <br />
+                <Text as="span" color="var(--cli-secondary)">--build</Text>{" "}
+                <Text as="span" color="var(--cli-accent)">--deploy</Text>{" "}
+                <Text as="span" color="var(--cli-success)">--ship</Text>
+                <span className="cli-cursor-line"></span>
               </Text>
             </Box>
 
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
-              gap={6}
+            {/* Subtitle */}
+            <Text
+              fontSize={{ base: "var(--text-lg)", md: "var(--text-xl)" }}
+              color="var(--cli-fgAlt)"
+              fontFamily="var(--font-mono)"
+              maxW="2xl"
+              mx="auto"
+              lineHeight="var(--leading-relaxed)"
             >
-              {topProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+              Terminal-first AI development agency. Human expertise + AI velocity.
+              <br />
+              Ship production-ready applications 3x faster.
+            </Text>
+
+            {/* CTA Buttons */}
+            <HStack justify="center" gap="var(--space-4)" flexWrap="wrap" mt="var(--space-6)">
+              <Link href="/contact" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-primary">
+                  $ init --project
+                  <HiArrowRight />
+                </Box>
+              </Link>
+              <Link href="/lookbook" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-outline">
+                  --view-work
+                </Box>
+              </Link>
+            </HStack>
+
+            {/* Stats */}
+            <HStack
+              justify="center"
+              gap="var(--space-8)"
+              flexWrap="wrap"
+              mt="var(--space-8)"
+              fontFamily="var(--font-mono)"
+              fontSize="var(--text-sm)"
+            >
+              <Box>
+                <Text as="span" color="var(--cli-success)">✓</Text>{" "}
+                <Text as="span" color="var(--cli-fg)" fontWeight="var(--font-bold)">3x</Text>{" "}
+                <Text as="span" color="var(--cli-fgAlt)">faster</Text>
+              </Box>
+              <Box>
+                <Text as="span" color="var(--cli-success)">✓</Text>{" "}
+                <Text as="span" color="var(--cli-fg)" fontWeight="var(--font-bold)">50+</Text>{" "}
+                <Text as="span" color="var(--cli-fgAlt)">projects</Text>
+              </Box>
+              <Box>
+                <Text as="span" color="var(--cli-success)">✓</Text>{" "}
+                <Text as="span" color="var(--cli-fg)" fontWeight="var(--font-bold)">97%</Text>{" "}
+                <Text as="span" color="var(--cli-fgAlt)">on-time</Text>
+              </Box>
+            </HStack>
+          </Stack>
+        </Box>
+      </Box>
+
+      {/* Featured Projects */}
+      <Box py={{ base: "var(--space-16)", md: "var(--space-24)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Stack gap="var(--space-12)">
+            {/* Section Header */}
+            <Box>
+              <Text
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-primary)"
+                mb="var(--space-2)"
+              >
+                $ ls -la ./projects/featured
+              </Text>
+              <Text
+                as="h2"
+                fontSize={{ base: "var(--text-3xl)", md: "var(--text-4xl)" }}
+                fontWeight="var(--font-bold)"
+                mb="var(--space-4)"
+              >
+                Recent Deployments
+              </Text>
+              <Text
+                fontSize="var(--text-lg)"
+                color="var(--cli-fgAlt)"
+                fontFamily="var(--font-mono)"
+              >
+                Production applications built with AI-enhanced workflows
+              </Text>
+            </Box>
+
+            {/* Project Cards */}
+            <Grid
+              templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+              gap="var(--space-6)"
+            >
+              {[
+                {
+                  title: "E-Commerce Platform",
+                  metric: "+47% conversion",
+                  tech: ["Next.js", "OpenAI", "Stripe"],
+                  status: "deployed",
+                },
+                {
+                  title: "AI Content Engine",
+                  metric: "85% faster",
+                  tech: ["Python", "Claude", "LangChain"],
+                  status: "deployed",
+                },
+                {
+                  title: "Analytics Dashboard",
+                  metric: "10x processing",
+                  tech: ["React", "TensorFlow", "MongoDB"],
+                  status: "deployed",
+                },
+              ].map((project, i) => (
+                <Box
+                  key={i}
+                  className="terminal-window"
+                  transition="all var(--transition-base)"
+                  cursor="pointer"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: "var(--shadow-xl)",
+                    borderColor: "var(--cli-primary)",
+                  }}
+                >
+                  <Box className="terminal-header">
+                    <span className="terminal-button close"></span>
+                    <span className="terminal-button minimize"></span>
+                    <span className="terminal-button maximize"></span>
+                    <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                      {project.title}
+                    </Text>
+                  </Box>
+                  <Box className="terminal-body">
+                    <Stack gap="var(--space-3)">
+                      <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" color="var(--cli-success)">
+                        {project.metric}
+                      </Text>
+                      <HStack gap="var(--space-2)" flexWrap="wrap">
+                        {project.tech.map((t) => (
+                          <Text
+                            key={t}
+                            fontSize="var(--text-xs)"
+                            px="var(--space-2)"
+                            py="var(--space-1)"
+                            background="var(--cli-bgHighlight)"
+                            borderRadius="var(--border-radius-sm)"
+                            color="var(--cli-accent)"
+                          >
+                            {t}
+                          </Text>
+                        ))}
+                      </HStack>
+                      <Text fontSize="var(--text-xs)" color="var(--cli-comment)">
+                        status: <Text as="span" color="var(--cli-success)">{project.status}</Text>
+                      </Text>
+                    </Stack>
+                  </Box>
+                </Box>
               ))}
             </Grid>
 
             <Box textAlign="center">
-              <CTAButton href="/lookbook" variant="outline" size="lg">
-                View Full Portfolio
-              </CTAButton>
+              <Link href="/lookbook" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-outline">
+                  $ cd lookbook && ls -la
+                </Box>
+              </Link>
             </Box>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
-      {/* Benefits Section */}
-      <Box py={{ base: 16, md: 24 }} bg="gray.50" _dark={{ bg: "gray.900" }}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
+      {/* Why Choose Us */}
+      <Box py={{ base: "var(--space-16)", md: "var(--space-24)" }}>
+        <Box className="container">
+          <Stack gap="var(--space-12)">
             <Box textAlign="center">
-              <Heading size={{ base: "xl", md: "2xl" }} mb={4}>
-                Why Partner With Us
-              </Heading>
               <Text
-                fontSize={{ base: "md", md: "lg" }}
-                color="gray.600"
-                _dark={{ color: "gray.400" }}
-                maxW="2xl"
-                mx="auto"
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-primary)"
+                mb="var(--space-2)"
               >
-                We combine human expertise with AI capabilities to deliver exceptional results
+                $ cat features.txt
+              </Text>
+              <Text
+                as="h2"
+                fontSize={{ base: "var(--text-3xl)", md: "var(--text-4xl)" }}
+                fontWeight="var(--font-bold)"
+              >
+                Developer-First Approach
               </Text>
             </Box>
 
             <Grid
               templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }}
-              gap={8}
+              gap="var(--space-6)"
             >
-              {benefits.map((benefit) => (
+              {[
+                {
+                  icon: HiLightningBolt,
+                  title: "AI Velocity",
+                  desc: "Ship 3x faster with AI-assisted development",
+                },
+                {
+                  icon: HiChartBar,
+                  title: "Data Driven",
+                  desc: "Metrics & KPIs tracked from day one",
+                },
+                {
+                  icon: HiClock,
+                  title: "97% On-Time",
+                  desc: "We respect deadlines and budgets",
+                },
+                {
+                  icon: HiShieldCheck,
+                  title: "Production Ready",
+                  desc: "Tested, secure, documented code",
+                },
+              ].map((feature, i) => (
                 <Box
-                  key={benefit.title}
-                  p={6}
-                  bg="white"
-                  _dark={{ bg: "gray.800" }}
-                  borderRadius="lg"
-                  shadow="sm"
-                  transition="all 0.3s"
+                  key={i}
+                  p="var(--space-6)"
+                  background="var(--cli-bgAlt)"
+                  border="var(--border-width) solid var(--cli-border)"
+                  borderRadius="var(--border-radius-lg)"
+                  transition="all var(--transition-base)"
                   _hover={{
-                    shadow: "lg",
-                    transform: "translateY(-4px)",
+                    borderColor: "var(--cli-primary)",
+                    transform: "translateY(-2px)",
                   }}
                 >
                   <Box
-                    as={benefit.icon}
-                    fontSize="3xl"
-                    color="brand.500"
-                    mb={4}
+                    as={feature.icon}
+                    fontSize="var(--text-4xl)"
+                    color="var(--cli-primary)"
+                    mb="var(--space-3)"
                   />
-                  <Heading size="md" mb={2}>
-                    {benefit.title}
-                  </Heading>
-                  <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-                    {benefit.description}
+                  <Text
+                    fontSize="var(--text-lg)"
+                    fontWeight="var(--font-bold)"
+                    mb="var(--space-2)"
+                  >
+                    {feature.title}
+                  </Text>
+                  <Text
+                    fontSize="var(--text-sm)"
+                    color="var(--cli-fgAlt)"
+                    fontFamily="var(--font-mono)"
+                  >
+                    {feature.desc}
                   </Text>
                 </Box>
               ))}
             </Grid>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
-      {/* Mid-page CTA Section */}
+      {/* CTA Section */}
       <Box
-        py={{ base: 16, md: 20 }}
-        bgGradient="linear(to-r, brand.500, accent.500)"
-        position="relative"
-        overflow="hidden"
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        background="var(--cli-bgAlt)"
+        borderTop="var(--border-width-thick) solid var(--cli-border)"
+        borderBottom="var(--border-width-thick) solid var(--cli-border)"
       >
-        <Container maxW="4xl" position="relative" zIndex={1}>
-          <Stack gap={6} textAlign="center" color="white">
-            <Heading size={{ base: "xl", md: "2xl" }}>
-              Ready to Build Something Amazing?
-            </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} opacity={0.95}>
-              Let's discuss your project and explore how AI can accelerate your development timeline
-              while maintaining the highest quality standards.
+        <Box className="container">
+          <Stack gap="var(--space-6)" textAlign="center" maxW="3xl" mx="auto">
+            <Text
+              as="h2"
+              fontSize={{ base: "var(--text-3xl)", md: "var(--text-4xl)" }}
+              fontWeight="var(--font-bold)"
+              className="neon-glow"
+            >
+              Ready to Build?
             </Text>
-            <HStack justify="center" gap={4} pt={4} flexWrap="wrap">
-              <CTAButton
-                href="/contact"
-                variant="secondary"
-                size="lg"
-              >
-                Start Your Project
-              </CTAButton>
-              <CTAButton
-                href="/ai-workflow"
-                variant="outline"
-                size="lg"
-              >
-                See Our Process
-              </CTAButton>
-            </HStack>
-          </Stack>
-        </Container>
-      </Box>
-
-      {/* Tech Excellence Section */}
-      <Box py={{ base: 16, md: 24 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={12} alignItems="center">
-            <Stack gap={6}>
-              <Badge colorPalette="accent" size="lg" width="fit-content">
-                Technology Stack
-              </Badge>
-              <Heading size={{ base: "xl", md: "2xl" }}>
-                Built with Modern, Production-Ready Technologies
-              </Heading>
-              <Text fontSize="lg" color="gray.600" _dark={{ color: "gray.400" }}>
-                We use the latest frameworks and AI tools to build scalable, maintainable applications.
-                From Next.js and TypeScript to Claude and GPT-4, our stack is optimized for performance
-                and developer experience.
-              </Text>
-              <HStack gap={4} pt={4}>
-                <CTAButton href="/tech-stack" size="lg">
-                  Explore Our Stack
-                </CTAButton>
-              </HStack>
-            </Stack>
-
-            <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-              {[
-                "Next.js", "TypeScript", "React", "Python", "Claude AI", "GPT-4",
-                "PostgreSQL", "Docker", "AWS", "TensorFlow", "LangChain", "Vercel"
-              ].map((tech) => (
-                <Box
-                  key={tech}
-                  p={4}
-                  bg="gray.50"
-                  _dark={{ bg: "gray.700" }}
-                  borderRadius="md"
-                  textAlign="center"
-                  fontSize="sm"
-                  fontWeight="semibold"
-                  transition="all 0.2s"
-                  _hover={{
-                    bg: "brand.50",
-                    color: "brand.600",
-                    transform: "scale(1.05)",
-                  }}
-                >
-                  {tech}
+            <Text
+              fontSize="var(--text-lg)"
+              color="var(--cli-fgAlt)"
+              fontFamily="var(--font-mono)"
+            >
+              Let's turn your idea into production-ready code.
+              <br />
+              Free consultation. No commitment required.
+            </Text>
+            <HStack justify="center" gap="var(--space-4)" flexWrap="wrap">
+              <Link href="/contact" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-primary">
+                  $ init --consultation
                 </Box>
-              ))}
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* Final CTA Section */}
-      <Box py={{ base: 16, md: 24 }} bg="gray.50" _dark={{ bg: "gray.900" }}>
-        <Container maxW="4xl">
-          <Stack gap={6} textAlign="center">
-            <Heading size={{ base: "xl", md: "2xl" }}>
-              Let's Turn Your Vision Into Reality
-            </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} color="gray.600" _dark={{ color: "gray.400" }}>
-              Schedule a free discovery call to discuss your project requirements, timeline, and budget.
-              We'll provide honest feedback and a clear path forward.
-            </Text>
-            <HStack justify="center" gap={4} pt={4} flexWrap="wrap">
-              <CTAButton href="/contact" size="lg">
-                Book Free Consultation
-              </CTAButton>
-              <CTAButton href="/studio" variant="outline" size="lg">
-                Browse Studio
-              </CTAButton>
+              </Link>
+              <Link href="/ai-workflow" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-outline">
+                  --view-process
+                </Box>
+              </Link>
             </HStack>
           </Stack>
-        </Container>
+        </Box>
       </Box>
     </Box>
   )

@@ -1,18 +1,20 @@
 'use client'
 
-import { Box, Container, Grid, Stack, Text, HStack } from "@chakra-ui/react"
+import { Box, Grid, Stack, Text, HStack } from "@chakra-ui/react"
 import Link from "next/link"
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"
-import MockLogo from "./MockLogo"
+import { HiTerminal, HiCode, HiMail } from "react-icons/hi"
 
 const footerLinks = {
   navigation: [
-    { label: "Home", href: "/" },
-    { label: "Lookbook", href: "/lookbook" },
-    { label: "Studio", href: "/studio" },
-    { label: "Tech Stack", href: "/tech-stack" },
-    { label: "AI Workflow", href: "/ai-workflow" },
-    { label: "Contact", href: "/contact" },
+    { label: "home", href: "/" },
+    { label: "lookbook", href: "/lookbook" },
+    { label: "studio", href: "/studio" },
+    { label: "tech-stack", href: "/tech-stack" },
+    { label: "ai-workflow", href: "/ai-workflow" },
+    { label: "brand", href: "/brand" },
+    { label: "components", href: "/components" },
+    { label: "contact", href: "/contact" },
   ],
   social: [
     { label: "GitHub", href: "#", icon: FaGithub },
@@ -25,34 +27,55 @@ export default function Footer() {
   return (
     <Box
       as="footer"
-      bg="gray.50"
-      borderTop="1px solid"
-      borderColor="gray.200"
-      py={12}
-      _dark={{ bg: "gray.900", borderColor: "gray.700" }}
+      background="var(--cli-bgAlt)"
+      borderTop="var(--border-width-thick) solid var(--cli-border)"
+      py="var(--space-12)"
     >
-      <Container maxW="7xl">
+      <Box className="container">
         <Grid
           templateColumns={{ base: "1fr", md: "2fr 1fr 1fr" }}
-          gap={8}
-          mb={8}
+          gap="var(--space-8)"
+          mb="var(--space-8)"
         >
           {/* Company Info */}
-          <Stack gap={4}>
-            <MockLogo size="md" />
-            <Text color="gray.600" _dark={{ color: "gray.400" }} maxW="sm">
-              AI-powered development agency specializing in cutting-edge web applications,
-              machine learning solutions, and innovative software development.
+          <Stack gap="var(--space-4)">
+            <HStack gap="var(--space-2)">
+              <HiTerminal size={32} color="var(--cli-primary)" />
+              <Text
+                fontFamily="var(--font-display)"
+                fontSize="var(--text-xl)"
+                fontWeight="var(--font-bold)"
+                color="var(--cli-fg)"
+              >
+                <Text as="span" color="var(--cli-primary)">$</Text> ai-agency
+              </Text>
+            </HStack>
+            <Text
+              fontFamily="var(--font-mono)"
+              fontSize="var(--text-sm)"
+              color="var(--cli-fgAlt)"
+              maxW="sm"
+              lineHeight="var(--leading-relaxed)"
+            >
+              # AI-powered development agency
+              <br />
+              # Terminal-first, developer-native
+              <br />
+              # Build faster, deploy smarter
             </Text>
-            <HStack gap={4}>
+            <HStack gap="var(--space-3)" mt="var(--space-2)">
               {footerLinks.social.map((social) => (
                 <Link key={social.label} href={social.href} aria-label={social.label}>
                   <Box
                     as={social.icon}
-                    fontSize="xl"
-                    color="gray.600"
-                    _hover={{ color: "brand.500" }}
-                    transition="color 0.2s"
+                    fontSize="var(--text-xl)"
+                    color="var(--cli-fgAlt)"
+                    cursor="pointer"
+                    transition="all var(--transition-base)"
+                    _hover={{
+                      color: "var(--cli-primary)",
+                      transform: "translateY(-2px)",
+                    }}
                   />
                 </Link>
               ))}
@@ -60,18 +83,24 @@ export default function Footer() {
           </Stack>
 
           {/* Navigation Links */}
-          <Stack gap={3}>
-            <Text fontWeight="semibold" fontSize="sm" color="gray.700" _dark={{ color: "gray.300" }}>
-              Navigation
+          <Stack gap="var(--space-2)">
+            <Text
+              fontFamily="var(--font-mono)"
+              fontWeight="var(--font-semibold)"
+              fontSize="var(--text-sm)"
+              color="var(--cli-primary)"
+              mb="var(--space-2)"
+            >
+              $ ls -la ./pages
             </Text>
             {footerLinks.navigation.map((link) => (
               <Link key={link.href} href={link.href}>
                 <Text
-                  fontSize="sm"
-                  color="gray.600"
-                  _hover={{ color: "brand.500" }}
-                  transition="color 0.2s"
-                  _dark={{ color: "gray.400" }}
+                  fontFamily="var(--font-mono)"
+                  fontSize="var(--text-sm)"
+                  color="var(--cli-fgAlt)"
+                  transition="color var(--transition-base)"
+                  _hover={{ color: "var(--cli-primary)" }}
                 >
                   {link.label}
                 </Text>
@@ -80,33 +109,79 @@ export default function Footer() {
           </Stack>
 
           {/* Contact Info */}
-          <Stack gap={3}>
-            <Text fontWeight="semibold" fontSize="sm" color="gray.700" _dark={{ color: "gray.300" }}>
-              Contact
+          <Stack gap="var(--space-3)">
+            <Text
+              fontFamily="var(--font-mono)"
+              fontWeight="var(--font-semibold)"
+              fontSize="var(--text-sm)"
+              color="var(--cli-primary)"
+              mb="var(--space-2)"
+            >
+              $ cat contact.txt
             </Text>
-            <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-              Email: hello@aiagency.dev
-            </Text>
-            <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-              Phone: +1 (555) 123-4567
-            </Text>
-            <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-              Available: Mon-Fri, 9AM-6PM EST
+
+            <HStack gap="var(--space-2)">
+              <HiMail size={16} color="var(--cli-accent)" />
+              <Text
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-fgAlt)"
+              >
+                hello@aiagency.dev
+              </Text>
+            </HStack>
+
+            <HStack gap="var(--space-2)">
+              <HiCode size={16} color="var(--cli-accent)" />
+              <Text
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-fgAlt)"
+              >
+                Available 24/7
+              </Text>
+            </HStack>
+
+            <Text
+              fontFamily="var(--font-mono)"
+              fontSize="var(--text-xs)"
+              color="var(--cli-comment)"
+              mt="var(--space-2)"
+            >
+              Response time: &lt; 24h
             </Text>
           </Stack>
         </Grid>
 
         <Box
-          pt={8}
-          borderTop="1px solid"
-          borderColor="gray.200"
-          _dark={{ borderColor: "gray.700" }}
+          pt="var(--space-6)"
+          borderTop="var(--border-width) solid var(--cli-border)"
         >
-          <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }} textAlign="center">
-            © {new Date().getFullYear()} AI Dev Agency. All rights reserved.
-          </Text>
+          <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="var(--space-4)">
+            <Text
+              fontFamily="var(--font-mono)"
+              fontSize="var(--text-xs)"
+              color="var(--cli-comment)"
+            >
+              © {new Date().getFullYear()} AI Dev Agency. All rights reserved.
+              <br />
+              Built with Next.js, TypeScript, and Claude Sonnet 4.5
+            </Text>
+            <Text
+              fontFamily="var(--font-mono)"
+              fontSize="var(--text-xs)"
+              color="var(--cli-comment)"
+              textAlign={{ base: "left", md: "right" }}
+            >
+              <Text as="span" color="var(--cli-success)">✓</Text> CLI-first design
+              {" | "}
+              <Text as="span" color="var(--cli-success)">✓</Text> Developer-native
+              {" | "}
+              <Text as="span" color="var(--cli-success)">✓</Text> Open source
+            </Text>
+          </Grid>
         </Box>
-      </Container>
+      </Box>
     </Box>
   )
 }

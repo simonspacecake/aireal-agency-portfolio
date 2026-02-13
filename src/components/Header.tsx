@@ -1,19 +1,19 @@
 'use client'
 
-import { Box, Container, HStack, IconButton } from "@chakra-ui/react"
+import { Box, HStack, Text } from "@chakra-ui/react"
 import { useState } from "react"
 import Link from "next/link"
-import { HiMenu, HiX } from "react-icons/hi"
-import MockLogo from "./MockLogo"
-import CTAButton from "./CTAButton"
+import { HiMenu, HiX, HiTerminal } from "react-icons/hi"
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Lookbook", href: "/lookbook" },
-  { label: "Studio", href: "/studio" },
-  { label: "Tech Stack", href: "/tech-stack" },
-  { label: "AI Workflow", href: "/ai-workflow" },
-  { label: "Contact", href: "/contact" },
+  { label: "home", href: "/" },
+  { label: "lookbook", href: "/lookbook" },
+  { label: "studio", href: "/studio" },
+  { label: "tech-stack", href: "/tech-stack" },
+  { label: "ai-workflow", href: "/ai-workflow" },
+  { label: "brand", href: "/brand" },
+  { label: "components", href: "/components" },
+  { label: "contact", href: "/contact" },
 ]
 
 export default function Header() {
@@ -24,31 +24,49 @@ export default function Header() {
       as="header"
       position="sticky"
       top={0}
-      zIndex={1000}
-      bg="white/80"
-      backdropFilter="blur(10px)"
-      borderBottom="1px solid"
-      borderColor="gray.200"
-      _dark={{
-        bg: "gray.900/80",
-        borderColor: "gray.700",
+      zIndex="var(--z-sticky)"
+      background="var(--cli-bg)"
+      borderBottom="var(--border-width) solid var(--cli-border)"
+      style={{
+        backdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(40, 42, 54, 0.95)',
       }}
     >
-      <Container maxW="7xl" py={4}>
+      <Box className="container" py="var(--space-3)">
         <HStack justify="space-between">
-          <Link href="/">
-            <MockLogo size="md" />
+          {/* Logo */}
+          <Link href="/" style={{ textDecoration: 'none' }}>
+            <HStack gap="var(--space-2)">
+              <HiTerminal size={24} color="var(--cli-primary)" />
+              <Text
+                fontFamily="var(--font-display)"
+                fontSize="var(--text-lg)"
+                fontWeight="var(--font-bold)"
+                color="var(--cli-fg)"
+              >
+                <Text as="span" color="var(--cli-primary)">$</Text> ai-agency
+              </Text>
+            </HStack>
           </Link>
 
           {/* Desktop Navigation */}
-          <HStack gap={8} display={{ base: "none", md: "flex" }}>
+          <HStack gap="var(--space-6)" display={{ base: "none", lg: "flex" }}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontWeight: 500,
-                  transition: "color 0.2s",
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--cli-fgAlt)',
+                  textDecoration: 'none',
+                  transition: 'color var(--transition-base)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--cli-primary)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--cli-fgAlt)'
                 }}
               >
                 {link.label}
@@ -56,56 +74,68 @@ export default function Header() {
             ))}
           </HStack>
 
-          <HStack gap={4}>
-            <Box display={{ base: "none", md: "block" }}>
-              <CTAButton href="/contact" size="md">
-                Get Started
-              </CTAButton>
-            </Box>
+          {/* CTA Button */}
+          <HStack gap="var(--space-4)">
+            <Link href="/contact" style={{ textDecoration: 'none' }}>
+              <Box
+                className="btn btn-primary"
+                display={{ base: "none", md: "inline-flex" }}
+              >
+                --hire-us
+              </Box>
+            </Link>
 
             {/* Mobile Menu Button */}
-            <IconButton
-              display={{ base: "flex", md: "none" }}
+            <Box
+              display={{ base: "flex", lg: "none" }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              variant="ghost"
-              aria-label="Toggle menu"
+              cursor="pointer"
+              p="var(--space-2)"
+              color="var(--cli-primary)"
+              transition="transform var(--transition-base)"
+              _hover={{ transform: "scale(1.1)" }}
             >
               {mobileMenuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-            </IconButton>
+            </Box>
           </HStack>
         </HStack>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <Box
-            mt={4}
-            pt={4}
-            borderTop="1px solid"
-            borderColor="gray.200"
-            _dark={{ borderColor: "gray.700" }}
-            display={{ base: "block", md: "none" }}
+            mt="var(--space-4)"
+            pt="var(--space-4)"
+            borderTop="var(--border-width) solid var(--cli-border)"
+            display={{ base: "block", lg: "none" }}
           >
-            <Box display="flex" flexDirection="column" gap={4}>
+            <Box display="flex" flexDirection="column" gap="var(--space-3)">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   style={{
-                    fontWeight: 500,
-                    padding: "8px 0",
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 'var(--text-sm)',
+                    color: 'var(--cli-fgAlt)',
+                    textDecoration: 'none',
+                    padding: 'var(--space-2) 0',
+                    transition: 'color var(--transition-base)',
                   }}
                 >
+                  <Text as="span" color="var(--cli-primary)">$ </Text>
                   {link.label}
                 </Link>
               ))}
-              <CTAButton href="/contact" size="md">
-                Get Started
-              </CTAButton>
+              <Link href="/contact" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-primary" mt="var(--space-2)">
+                  --hire-us
+                </Box>
+              </Link>
             </Box>
           </Box>
         )}
-      </Container>
+      </Box>
     </Box>
   )
 }
