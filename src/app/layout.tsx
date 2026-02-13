@@ -2,10 +2,12 @@ import type { Metadata } from 'next'
 import { Providers } from './providers'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AI Dev Agency - AI-Powered Development Solutions',
-  description: 'Professional AI development agency specializing in web applications, machine learning solutions, and innovative software development.',
+  title: 'AI Dev Agency // CLI Edition',
+  description: 'AI-powered development agency. Terminal-first, developer-native. Build faster, deploy smarter.',
+  keywords: ['AI development', 'CLI tools', 'terminal', 'developer tools', 'web development'],
 }
 
 export default function RootLayout({
@@ -14,16 +16,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-      </head>
-      <body>
+    <html lang="en" className="dark">
+      <body className="scanlines crt-effect">
         <Providers>
           <Header />
-          {children}
+          <main>{children}</main>
           <Footer />
         </Providers>
       </body>
