@@ -3,7 +3,8 @@
 import { Box, HStack, Text } from "@chakra-ui/react"
 import { useState } from "react"
 import Link from "next/link"
-import { HiMenu, HiX, HiTerminal } from "react-icons/hi"
+import Image from "next/image"
+import { HiMenu, HiX } from "react-icons/hi"
 
 const navLinks = [
   { label: "home", href: "/" },
@@ -37,15 +38,14 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" style={{ textDecoration: 'none' }}>
             <HStack gap="var(--space-2)">
-              <HiTerminal size={24} color="var(--cli-primary)" />
-              <Text
-                fontFamily="var(--font-display)"
-                fontSize="var(--text-lg)"
-                fontWeight="var(--font-bold)"
-                color="var(--cli-fg)"
-              >
-                <Text as="span" color="var(--cli-primary)">$</Text> ai-agency
-              </Text>
+              <Image
+                src="/logo.png"
+                alt="AIreal.agency"
+                width={180}
+                height={40}
+                style={{ height: 'auto', maxWidth: '180px' }}
+                priority
+              />
             </HStack>
           </Link>
 

@@ -5,9 +5,12 @@ import Footer from '@/components/Footer'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AI Dev Agency // CLI Edition',
-  description: 'AI-powered development agency. Terminal-first, developer-native. Build faster, deploy smarter.',
-  keywords: ['AI development', 'CLI tools', 'terminal', 'developer tools', 'web development'],
+  title: 'AIreal.agency - We ship real User eXperiences',
+  description: 'AIreal.agency delivers real User eXperiences through AI-powered development. Terminal-first, developer-native. Build faster, deploy smarter.',
+  keywords: ['AI development', 'UX design', 'user experience', 'AIreal.agency', 'web development', 'real experiences'],
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({

@@ -10,29 +10,15 @@ export default function Home() {
       {/* Hero Section */}
       <Box
         py={{ base: "var(--space-20)", md: "var(--space-32)" }}
-        position="relative"
-        overflow="hidden"
         borderBottom="var(--border-width-thick) solid var(--cli-border)"
       >
-        {/* Scanline effect background */}
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          opacity={0.02}
-          pointerEvents="none"
-          background="repeating-linear-gradient(0deg, var(--cli-fg), var(--cli-fg) 1px, transparent 1px, transparent 2px)"
-        />
-
-        <Box className="container" position="relative" zIndex={1}>
-          <Stack gap="var(--space-6)" maxW="4xl" mx="auto" textAlign="center">
+        <Box className="container">
+          <Stack gap="var(--space-8)" maxW="4xl" mx="auto" textAlign="center">
             {/* Terminal prompt */}
             <HStack justify="center" gap="var(--space-2)">
               <HiTerminal size={20} color="var(--cli-primary)" />
               <Text fontFamily="var(--font-mono)" fontSize="var(--text-sm)" color="var(--cli-comment)">
-                user@ai-agency:~$
+                user@aireal.agency:~$
               </Text>
             </HStack>
 
@@ -47,11 +33,12 @@ export default function Home() {
                 color="var(--cli-fg)"
                 mb="var(--space-4)"
               >
-                <Text as="span" color="var(--cli-primary)">$</Text> ai-dev-agency
+                <Text as="span" color="var(--cli-primary)">AIreal.agency</Text>
                 <br />
-                <Text as="span" color="var(--cli-secondary)">--build</Text>{" "}
-                <Text as="span" color="var(--cli-accent)">--deploy</Text>{" "}
-                <Text as="span" color="var(--cli-success)">--ship</Text>
+                <Text as="span" color="var(--cli-secondary)">We ship real</Text>{" "}
+                <Text as="span" color="var(--cli-accent)">User e</Text>
+                <Text as="span" color="var(--cli-success)">X</Text>
+                <Text as="span" color="var(--cli-accent)">periences</Text>
                 <span className="cli-cursor-line"></span>
               </Text>
             </Box>
@@ -65,9 +52,9 @@ export default function Home() {
               mx="auto"
               lineHeight="var(--leading-relaxed)"
             >
-              Terminal-first AI development agency. Human expertise + AI velocity.
+              Terminal-first AI development agency focused on delivering authentic user experiences.
               <br />
-              Ship production-ready applications 3x faster.
+              Human expertise + AI velocity. Ship production-ready applications 3x faster.
             </Text>
 
             {/* CTA Buttons */}
@@ -115,9 +102,9 @@ export default function Home() {
       </Box>
 
       {/* Featured Projects */}
-      <Box py={{ base: "var(--space-16)", md: "var(--space-24)" }} background="var(--cli-bgAlt)">
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
         <Box className="container">
-          <Stack gap="var(--space-12)">
+          <Stack gap="var(--space-10)">
             {/* Section Header */}
             <Box>
               <Text
@@ -230,9 +217,9 @@ export default function Home() {
       </Box>
 
       {/* Why Choose Us */}
-      <Box py={{ base: "var(--space-16)", md: "var(--space-24)" }}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }}>
         <Box className="container">
-          <Stack gap="var(--space-12)">
+          <Stack gap="var(--space-10)">
             <Box textAlign="center">
               <Text
                 fontFamily="var(--font-mono)"
@@ -321,10 +308,9 @@ export default function Home() {
         py={{ base: "var(--space-16)", md: "var(--space-20)" }}
         background="var(--cli-bgAlt)"
         borderTop="var(--border-width-thick) solid var(--cli-border)"
-        borderBottom="var(--border-width-thick) solid var(--cli-border)"
       >
         <Box className="container">
-          <Stack gap="var(--space-6)" textAlign="center" maxW="3xl" mx="auto">
+          <Stack gap="var(--space-8)" textAlign="center" maxW="3xl" mx="auto">
             <Text
               as="h2"
               fontSize={{ base: "var(--text-3xl)", md: "var(--text-4xl)" }}

@@ -1,10 +1,9 @@
 'use client'
 
-import { Box, Container, Heading, Text, Stack, Grid, HStack } from "@chakra-ui/react"
-import Hero from "@/components/Hero"
+import { Box, Grid, Stack, Text, HStack } from "@chakra-ui/react"
+import Link from "next/link"
 import ContactForm from "@/components/ContactForm"
-import CTAButton from "@/components/CTAButton"
-import { HiClock, HiCheckCircle, HiChatAlt2, HiShieldCheck } from "react-icons/hi"
+import { HiClock, HiCheckCircle, HiChatAlt2, HiShieldCheck, HiMail } from "react-icons/hi"
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa"
 
 const benefits = [
@@ -34,8 +33,8 @@ const contactMethods = [
   {
     icon: FaEnvelope,
     label: "Email",
-    value: "hello@aiagency.dev",
-    action: "mailto:hello@aiagency.dev",
+    value: "hello@aireal.agency",
+    action: "mailto:hello@aireal.agency",
   },
   {
     icon: FaPhone,
@@ -53,149 +52,193 @@ const contactMethods = [
 
 export default function ContactPage() {
   return (
-    <Box>
-      {/* Hero Section */}
-      <Hero
-        title="Let's Build Something Amazing"
-        subtitle="Ready to transform your ideas into reality? Get in touch and let's discuss how we can help you achieve your goals with AI-powered development."
-      />
+    <Box minH="100vh" background="var(--cli-bg)" color="var(--cli-fg)">
+      {/* Hero */}
+      <Box
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderBottom="var(--border-width-thick) solid var(--cli-border)"
+      >
+        <Box className="container">
+          <Stack gap="var(--space-6)" maxW="4xl" mx="auto" textAlign="center">
+            <HStack justify="center" gap="var(--space-2)">
+              <HiMail size={24} color="var(--cli-primary)" />
+              <Text fontFamily="var(--font-mono)" fontSize="var(--text-sm)" color="var(--cli-comment)">
+                ~/contact/inquiries
+              </Text>
+            </HStack>
+
+            <Text
+              as="h1"
+              fontSize={{ base: "var(--text-4xl)", md: "var(--text-5xl)" }}
+              fontWeight="var(--font-black)"
+              lineHeight="var(--leading-tight)"
+            >
+              <Text as="span" color="var(--cli-primary)">$</Text> send{" "}
+              <Text as="span" color="var(--cli-secondary)">--message</Text>
+              <span className="cli-cursor-line"></span>
+            </Text>
+
+            <Text
+              fontSize="var(--text-lg)"
+              color="var(--cli-fgAlt)"
+              fontFamily="var(--font-mono)"
+              lineHeight="var(--leading-relaxed)"
+            >
+              Ready to transform your ideas into reality? Let's discuss your project.
+            </Text>
+          </Stack>
+        </Box>
+      </Box>
 
       {/* Benefits Section */}
-      <Box py={{ base: 16, md: 20 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Stack gap="var(--space-10)">
             <Box textAlign="center">
-              <Heading size={{ base: "xl", md: "2xl" }} mb={4}>
-                Why Work With Us
-              </Heading>
               <Text
-                fontSize={{ base: "md", md: "lg" }}
-                color="gray.600"
-                _dark={{ color: "gray.400" }}
-                maxW="2xl"
-                mx="auto"
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-primary)"
+                mb="var(--space-2)"
               >
-                We're committed to your success, from the first consultation to long-term support
+                $ cat benefits.txt
+              </Text>
+              <Text fontSize="var(--text-2xl)" fontWeight="var(--font-bold)" mb="var(--space-2)">
+                Why Work With Us
+              </Text>
+              <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+                We're committed to your success, from first consultation to long-term support
               </Text>
             </Box>
 
             <Grid
               templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }}
-              gap={6}
+              gap="var(--space-6)"
             >
               {benefits.map((benefit) => (
                 <Box
                   key={benefit.title}
-                  p={6}
-                  bg="gray.50"
-                  _dark={{ bg: "gray.900" }}
-                  borderRadius="lg"
+                  p="var(--space-6)"
+                  background="var(--cli-bg)"
+                  border="var(--border-width) solid var(--cli-border)"
+                  borderRadius="var(--border-radius-lg)"
                   textAlign="center"
+                  transition="all var(--transition-base)"
+                  _hover={{
+                    borderColor: "var(--cli-primary)",
+                    transform: "translateY(-2px)",
+                  }}
                 >
                   <Box
                     as={benefit.icon}
-                    fontSize="3xl"
-                    color="brand.500"
-                    mb={4}
+                    fontSize="var(--text-3xl)"
+                    color="var(--cli-primary)"
+                    mb="var(--space-4)"
                     mx="auto"
                     width="fit-content"
                   />
-                  <Heading size="md" mb={2}>
+                  <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" mb="var(--space-2)">
                     {benefit.title}
-                  </Heading>
-                  <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
+                  </Text>
+                  <Text fontSize="var(--text-sm)" color="var(--cli-fgAlt)">
                     {benefit.description}
                   </Text>
                 </Box>
               ))}
             </Grid>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
       {/* Contact Form Section */}
-      <Box py={{ base: 16, md: 24 }} bg="gray.50" _dark={{ bg: "gray.900" }}>
-        <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={12} alignItems="start">
-            <Stack gap={8}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }}>
+        <Box className="container">
+          <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap="var(--space-10)" alignItems="start">
+            <Stack gap="var(--space-8)">
               <Box>
-                <Heading size={{ base: "xl", md: "2xl" }} mb={4}>
-                  Get In Touch
-                </Heading>
                 <Text
-                  fontSize={{ base: "md", md: "lg" }}
-                  color="gray.600"
-                  _dark={{ color: "gray.400" }}
+                  fontFamily="var(--font-mono)"
+                  fontSize="var(--text-sm)"
+                  color="var(--cli-primary)"
+                  mb="var(--space-2)"
                 >
-                  Fill out the form and we'll get back to you within 24 hours. For urgent inquiries,
-                  feel free to email or call us directly.
+                  $ ./contact-us.sh
+                </Text>
+                <Text fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }} fontWeight="var(--font-bold)" mb="var(--space-4)">
+                  Get In Touch
+                </Text>
+                <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+                  Fill out the form and we'll get back to you within 24 hours.
+                  For urgent inquiries, feel free to email or call us directly.
                 </Text>
               </Box>
 
-              <Stack gap={4}>
-                <Heading size="lg" mb={2}>
-                  What Happens Next?
-                </Heading>
-                {[
-                  "We'll review your inquiry and project details",
-                  "Schedule a free 30-minute discovery call",
-                  "Discuss your goals, timeline, and budget",
-                  "Provide a detailed proposal and timeline",
-                  "Start building your project",
-                ].map((step, index) => (
-                  <HStack key={index} align="start">
-                    <Box
-                      minW="28px"
-                      h="28px"
-                      borderRadius="full"
-                      bg="brand.500"
-                      color="white"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      fontWeight="bold"
-                      fontSize="sm"
-                      mt={0.5}
-                    >
-                      {index + 1}
-                    </Box>
-                    <Text color="gray.700" _dark={{ color: "gray.300" }}>
-                      {step}
-                    </Text>
-                  </HStack>
-                ))}
-              </Stack>
+              <Box>
+                <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" mb="var(--space-4)" color="var(--cli-secondary)">
+                  # What Happens Next?
+                </Text>
+                <Stack gap="var(--space-3)">
+                  {[
+                    "We'll review your inquiry and project details",
+                    "Schedule a free 30-minute discovery call",
+                    "Discuss your goals, timeline, and budget",
+                    "Provide a detailed proposal and timeline",
+                    "Start building your project",
+                  ].map((step, index) => (
+                    <HStack key={index} align="start" gap="var(--space-3)">
+                      <Box
+                        minW="28px"
+                        h="28px"
+                        borderRadius="var(--border-radius-full)"
+                        background="var(--cli-primary)"
+                        color="var(--cli-bg)"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        fontWeight="var(--font-bold)"
+                        fontSize="var(--text-sm)"
+                        fontFamily="var(--font-mono)"
+                      >
+                        {index + 1}
+                      </Box>
+                      <Text color="var(--cli-fgAlt)" fontSize="var(--text-sm)">
+                        {step}
+                      </Text>
+                    </HStack>
+                  ))}
+                </Stack>
+              </Box>
 
               <Box>
-                <Heading size="lg" mb={4}>
-                  Other Ways to Connect
-                </Heading>
-                <Stack gap={4}>
+                <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" mb="var(--space-4)" color="var(--cli-secondary)">
+                  # Other Ways to Connect
+                </Text>
+                <Stack gap="var(--space-4)">
                   {contactMethods.map((method) => (
                     <HStack
                       key={method.label}
-                      p={4}
-                      bg="white"
-                      _dark={{ bg: "gray.800" }}
-                      borderRadius="md"
+                      p="var(--space-4)"
+                      background="var(--cli-bgAlt)"
+                      border="var(--border-width) solid var(--cli-border)"
+                      borderRadius="var(--border-radius)"
                       cursor={method.action ? "pointer" : "default"}
-                      transition="all 0.2s"
+                      transition="all var(--transition-base)"
                       _hover={method.action ? {
-                        shadow: "md",
+                        borderColor: "var(--cli-primary)",
                         transform: "translateY(-2px)",
                       } : {}}
                       onClick={() => method.action && window.open(method.action, "_self")}
                     >
                       <Box
                         as={method.icon}
-                        fontSize="2xl"
-                        color="brand.500"
+                        fontSize="var(--text-2xl)"
+                        color="var(--cli-primary)"
                       />
                       <Box>
-                        <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
+                        <Text fontSize="var(--text-sm)" color="var(--cli-comment)" fontFamily="var(--font-mono)">
                           {method.label}
                         </Text>
-                        <Text fontWeight="semibold">
+                        <Text fontWeight="var(--font-semibold)" fontFamily="var(--font-mono)">
                           {method.value}
                         </Text>
                       </Box>
@@ -207,78 +250,90 @@ export default function ContactPage() {
 
             <ContactForm />
           </Grid>
-        </Container>
+        </Box>
       </Box>
 
       {/* Availability Section */}
-      <Box py={{ base: 16, md: 20 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="5xl">
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
           <Box
-            bg="gray.50"
-            _dark={{ bg: "gray.900" }}
-            p={{ base: 8, md: 12 }}
-            borderRadius="xl"
-            textAlign="center"
+            className="terminal-window"
+            maxW="5xl"
+            mx="auto"
           >
-            <Stack gap={6}>
-              <Heading size={{ base: "lg", md: "xl" }}>
-                Office Hours & Availability
-              </Heading>
-              <Grid
-                templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-                gap={6}
-                textAlign="left"
-              >
-                <Box>
-                  <Text fontWeight="semibold" mb={2}>
-                    Business Hours
-                  </Text>
-                  <Stack gap={1} fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-                    <Text>Monday - Friday: 9:00 AM - 6:00 PM EST</Text>
-                    <Text>Saturday: 10:00 AM - 2:00 PM EST</Text>
-                    <Text>Sunday: Closed</Text>
-                  </Stack>
-                </Box>
-                <Box>
-                  <Text fontWeight="semibold" mb={2}>
-                    Response Time
-                  </Text>
-                  <Stack gap={1} fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-                    <Text>Email: Within 24 hours</Text>
-                    <Text>Phone: Same business day</Text>
-                    <Text>Emergency: Call for immediate support</Text>
-                  </Stack>
-                </Box>
-              </Grid>
-            </Stack>
+            <Box className="terminal-header">
+              <span className="terminal-button close"></span>
+              <span className="terminal-button minimize"></span>
+              <span className="terminal-button maximize"></span>
+              <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                availability.txt
+              </Text>
+            </Box>
+            <Box className="terminal-body">
+              <Stack gap="var(--space-6)">
+                <Text fontSize="var(--text-xl)" fontWeight="var(--font-bold)" textAlign="center" color="var(--cli-primary)">
+                  # Office Hours & Availability
+                </Text>
+                <Grid
+                  templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
+                  gap="var(--space-6)"
+                >
+                  <Box>
+                    <Text fontWeight="var(--font-semibold)" mb="var(--space-2)" color="var(--cli-secondary)">
+                      ## Business Hours
+                    </Text>
+                    <Stack gap="var(--space-1)" fontSize="var(--text-sm)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+                      <Text>Monday - Friday: 9:00 AM - 6:00 PM EST</Text>
+                      <Text>Saturday: 10:00 AM - 2:00 PM EST</Text>
+                      <Text>Sunday: Closed</Text>
+                    </Stack>
+                  </Box>
+                  <Box>
+                    <Text fontWeight="var(--font-semibold)" mb="var(--space-2)" color="var(--cli-secondary)">
+                      ## Response Time
+                    </Text>
+                    <Stack gap="var(--space-1)" fontSize="var(--text-sm)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+                      <Text>Email: Within 24 hours</Text>
+                      <Text>Phone: Same business day</Text>
+                      <Text>Emergency: Call for immediate support</Text>
+                    </Stack>
+                  </Box>
+                </Grid>
+              </Stack>
+            </Box>
           </Box>
-        </Container>
+        </Box>
       </Box>
 
       {/* Final CTA */}
       <Box
-        py={{ base: 16, md: 20 }}
-        bgGradient="linear(to-r, brand.500, accent.500)"
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderTop="var(--border-width-thick) solid var(--cli-border)"
       >
-        <Container maxW="4xl">
-          <Stack gap={6} textAlign="center" color="white">
-            <Heading size={{ base: "xl", md: "2xl" }}>
+        <Box className="container">
+          <Stack gap="var(--space-6)" textAlign="center" maxW="3xl" mx="auto">
+            <Text
+              fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }}
+              fontWeight="var(--font-bold)"
+            >
               Prefer to Schedule a Call?
-            </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} opacity={0.95}>
+            </Text>
+            <Text fontSize="var(--text-lg)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
               Book a free 30-minute consultation to discuss your project in detail.
               No commitment required.
             </Text>
-            <HStack justify="center" gap={4} pt={4}>
-              <CTAButton variant="secondary" size="lg">
-                Schedule Call
-              </CTAButton>
-              <CTAButton href="/lookbook" variant="outline" size="lg">
-                View Our Work
-              </CTAButton>
+            <HStack justify="center" gap="var(--space-4)" flexWrap="wrap">
+              <Box className="btn btn-primary">
+                $ schedule --call
+              </Box>
+              <Link href="/lookbook" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-outline">
+                  --view-work
+                </Box>
+              </Link>
             </HStack>
           </Stack>
-        </Container>
+        </Box>
       </Box>
     </Box>
   )

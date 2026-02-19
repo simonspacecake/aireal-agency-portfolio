@@ -1,6 +1,6 @@
-# AI Dev Agency Portfolio
+# AIreal.agency - We ship real User eXperiences
 
-A modern, high-converting portfolio website for an AI development agency, built with Next.js 15, Chakra UI v3, and TypeScript.
+A modern, high-converting portfolio website for AIreal.agency, an AI development agency focused on delivering authentic user experiences. Built with Next.js 15, Chakra UI v3, and TypeScript.
 
 ## Features
 

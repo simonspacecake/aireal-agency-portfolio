@@ -2,8 +2,9 @@
 
 import { Box, Grid, Stack, Text, HStack } from "@chakra-ui/react"
 import Link from "next/link"
+import Image from "next/image"
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"
-import { HiTerminal, HiCode, HiMail } from "react-icons/hi"
+import { HiCode, HiMail } from "react-icons/hi"
 
 const footerLinks = {
   navigation: [
@@ -39,17 +40,15 @@ export default function Footer() {
         >
           {/* Company Info */}
           <Stack gap="var(--space-4)">
-            <HStack gap="var(--space-2)">
-              <HiTerminal size={32} color="var(--cli-primary)" />
-              <Text
-                fontFamily="var(--font-display)"
-                fontSize="var(--text-xl)"
-                fontWeight="var(--font-bold)"
-                color="var(--cli-fg)"
-              >
-                <Text as="span" color="var(--cli-primary)">$</Text> ai-agency
-              </Text>
-            </HStack>
+            <Link href="/" style={{ textDecoration: 'none' }}>
+              <Image
+                src="/logo.png"
+                alt="AIreal.agency"
+                width={180}
+                height={40}
+                style={{ height: 'auto', maxWidth: '180px' }}
+              />
+            </Link>
             <Text
               fontFamily="var(--font-mono)"
               fontSize="var(--text-sm)"
@@ -57,7 +56,7 @@ export default function Footer() {
               maxW="sm"
               lineHeight="var(--leading-relaxed)"
             >
-              # AI-powered development agency
+              # We ship real User eXperiences
               <br />
               # Terminal-first, developer-native
               <br />
@@ -127,7 +126,7 @@ export default function Footer() {
                 fontSize="var(--text-sm)"
                 color="var(--cli-fgAlt)"
               >
-                hello@aiagency.dev
+                hello@aireal.agency
               </Text>
             </HStack>
 
@@ -163,7 +162,7 @@ export default function Footer() {
               fontSize="var(--text-xs)"
               color="var(--cli-comment)"
             >
-              © {new Date().getFullYear()} AI Dev Agency. All rights reserved.
+              © {new Date().getFullYear()} AIreal.agency. All rights reserved.
               <br />
               Built with Next.js, TypeScript, and Claude Sonnet 4.5
             </Text>
