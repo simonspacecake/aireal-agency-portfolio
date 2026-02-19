@@ -1,9 +1,9 @@
 'use client'
 
-import { Box, Container, Heading, Text, Stack, Grid, HStack, Code } from "@chakra-ui/react"
+import { Box, Grid, Stack, Text, HStack, Code } from "@chakra-ui/react"
 import { useTheme } from "@/contexts/ThemeContext"
 import ThemeSwitcher from "@/components/ThemeSwitcher"
-import { HiTerminal, HiCode, HiColorSwatch } from "react-icons/hi"
+import { HiTerminal, HiColorSwatch } from "react-icons/hi"
 
 export default function BrandPage() {
   const { currentTheme } = useTheme()
@@ -53,101 +53,87 @@ export default function BrandPage() {
   ]
 
   return (
-    <Box minH="100vh" bg="cli.bg" color="cli.fg">
+    <Box minH="100vh" background="var(--cli-bg)" color="var(--cli-fg)">
       {/* Hero */}
       <Box
-        py={20}
-        borderBottom="2px solid"
-        borderColor="cli.border"
-        position="relative"
-        overflow="hidden"
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderBottom="var(--border-width-thick) solid var(--cli-border)"
       >
-        <Container maxW="7xl" position="relative" zIndex={1}>
-          <Stack gap={6} maxW="4xl">
-            <HStack>
+        <Box className="container">
+          <Stack gap="var(--space-6)" maxW="4xl">
+            <HStack gap="var(--space-2)">
               <HiTerminal size={40} color="var(--cli-primary)" />
-              <Text fontSize="sm" color="cli.comment" fontFamily="mono">
+              <Text fontSize="var(--text-sm)" color="var(--cli-comment)" fontFamily="var(--font-mono)">
                 ~/brand/guidelines
               </Text>
             </HStack>
 
-            <Heading
-              size="4xl"
-              fontFamily="mono"
-              fontWeight="black"
-              color="cli.fg"
-              lineHeight="1.1"
-            >
-              <Text as="span" color="cli.primary">$</Text> brand{" "}
-              <Text as="span" color="cli.secondary">--identity</Text>
-            </Heading>
-
             <Text
-              fontSize="xl"
-              color="cli.fgAlt"
-              fontFamily="mono"
-              maxW="2xl"
+              as="h1"
+              fontSize={{ base: "var(--text-4xl)", md: "var(--text-5xl)" }}
+              fontFamily="var(--font-display)"
+              fontWeight="var(--font-black)"
+              color="var(--cli-fg)"
+              lineHeight="var(--leading-tight)"
             >
-              CLI-first design system. Terminal aesthetics meet modern web.
+              <Text as="span" color="var(--cli-primary)">$</Text> brand{" "}
+              <Text as="span" color="var(--cli-secondary)">--identity</Text>
               <span className="cli-cursor-line"></span>
             </Text>
 
-            <HStack gap={4} pt={4} fontFamily="mono" fontSize="sm">
-              <Text color="cli.success">✓ 6 color schemes</Text>
-              <Text color="cli.success">✓ Monospace typography</Text>
-              <Text color="cli.success">✓ Terminal components</Text>
+            <Text
+              fontSize="var(--text-xl)"
+              color="var(--cli-fgAlt)"
+              fontFamily="var(--font-mono)"
+              maxW="2xl"
+            >
+              CLI-first design system. Terminal aesthetics meet modern web.
+            </Text>
+
+            <HStack gap="var(--space-4)" pt="var(--space-4)" fontFamily="var(--font-mono)" fontSize="var(--text-sm)">
+              <Text color="var(--cli-success)">✓ 6 color schemes</Text>
+              <Text color="var(--cli-success)">✓ Monospace typography</Text>
+              <Text color="var(--cli-success)">✓ Terminal components</Text>
             </HStack>
           </Stack>
-        </Container>
-
-        {/* Terminal scanlines effect */}
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          opacity={0.03}
-          pointerEvents="none"
-          background="repeating-linear-gradient(0deg, var(--cli-fg), var(--cli-fg) 1px, transparent 1px, transparent 2px)"
-        />
+        </Box>
       </Box>
 
       {/* Theme Switcher Section */}
-      <Box py={16} bg="cli.bgAlt">
-        <Container maxW="7xl">
-          <Stack gap={12}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Stack gap="var(--space-10)">
             <Box>
-              <HStack mb={4}>
+              <HStack mb="var(--space-4)" gap="var(--space-2)">
                 <HiColorSwatch size={24} color="var(--cli-primary)" />
-                <Heading size="2xl" fontFamily="mono">
+                <Text fontSize="var(--text-2xl)" fontFamily="var(--font-display)" fontWeight="var(--font-bold)">
                   Color Schemes
-                </Heading>
+                </Text>
               </HStack>
-              <Text color="cli.fgAlt" fontFamily="mono">
+              <Text color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
                 Choose from 6 trending CLI themes. Each optimized for long coding sessions.
               </Text>
             </Box>
 
-            <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={8}>
+            <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="var(--space-8)">
               <ThemeSwitcher />
 
-              <Box className="terminal-window" p={6}>
+              <Box className="terminal-window">
                 <Box className="terminal-header">
                   <span className="terminal-button close"></span>
                   <span className="terminal-button minimize"></span>
                   <span className="terminal-button maximize"></span>
-                  <Text ml={3} fontSize="xs" color="cli.fgAlt" fontFamily="mono">
+                  <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
                     theme-preview.ts
                   </Text>
                 </Box>
                 <Box className="terminal-body">
                   <Code
-                    fontFamily="mono"
-                    fontSize="sm"
-                    bg="transparent"
-                    color="cli.fg"
-                    p={0}
+                    fontFamily="var(--font-mono)"
+                    fontSize="var(--text-sm)"
+                    background="transparent"
+                    color="var(--cli-fg)"
+                    padding={0}
                   >
                     <pre>
 {`// Current theme: ${currentTheme.name}
@@ -165,33 +151,34 @@ export default colors;`}
               </Box>
             </Grid>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
       {/* Color Palette */}
-      <Box py={16}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }}>
+        <Box className="container">
+          <Stack gap="var(--space-10)">
             <Box>
-              <Heading size="2xl" fontFamily="mono" mb={2}>
+              <Text fontSize="var(--text-2xl)" fontFamily="var(--font-display)" fontWeight="var(--font-bold)" mb="var(--space-2)">
                 Color Palette
-              </Heading>
-              <Text color="cli.comment" fontFamily="mono" fontSize="sm">
+              </Text>
+              <Text color="var(--cli-comment)" fontFamily="var(--font-mono)" fontSize="var(--text-sm)">
                 # {currentTheme.name} theme colors
               </Text>
             </Box>
 
-            <Stack gap={8}>
+            <Stack gap="var(--space-8)">
               {colorGroups.map((group) => (
                 <Box key={group.title}>
-                  <Heading
-                    size="lg"
-                    fontFamily="mono"
-                    color="cli.primary"
-                    mb={4}
+                  <Text
+                    fontSize="var(--text-lg)"
+                    fontFamily="var(--font-display)"
+                    fontWeight="var(--font-bold)"
+                    color="var(--cli-primary)"
+                    mb="var(--space-4)"
                   >
                     {group.title}
-                  </Heading>
+                  </Text>
 
                   <Grid
                     templateColumns={{
@@ -199,41 +186,41 @@ export default colors;`}
                       md: "repeat(3, 1fr)",
                       lg: "repeat(4, 1fr)",
                     }}
-                    gap={4}
+                    gap="var(--space-4)"
                   >
                     {group.colors.map((color) => (
                       <Box
                         key={color.key}
-                        border="1px solid"
-                        borderColor="cli.border"
-                        borderRadius="md"
+                        border="var(--border-width) solid var(--cli-border)"
+                        borderRadius="var(--border-radius-md)"
                         overflow="hidden"
-                        transition="all 0.2s"
+                        transition="all var(--transition-base)"
                         _hover={{
-                          borderColor: "cli.primary",
+                          borderColor: "var(--cli-primary)",
                           transform: "translateY(-2px)",
                         }}
                       >
                         <Box
                           h="80px"
-                          bg={currentTheme.colors[color.key as keyof typeof currentTheme.colors] as string}
+                          background={currentTheme.colors[color.key as keyof typeof currentTheme.colors] as string}
                         />
-                        <Box p={3} bg="cli.bgAlt">
+                        <Box p="var(--space-3)" background="var(--cli-bgAlt)">
                           <Text
-                            fontFamily="mono"
-                            fontSize="sm"
-                            fontWeight="semibold"
-                            mb={1}
+                            fontFamily="var(--font-mono)"
+                            fontSize="var(--text-sm)"
+                            fontWeight="var(--font-semibold)"
+                            mb="var(--space-1)"
                           >
                             {color.name}
                           </Text>
                           <Code
-                            fontFamily="mono"
-                            fontSize="xs"
-                            bg="cli.bgHighlight"
-                            px={2}
-                            py={1}
-                            borderRadius="sm"
+                            fontFamily="var(--font-mono)"
+                            fontSize="var(--text-xs)"
+                            background="var(--cli-bgHighlight)"
+                            px="var(--space-2)"
+                            py="var(--space-1)"
+                            borderRadius="var(--border-radius-sm)"
+                            color="var(--cli-accent)"
                           >
                             {currentTheme.colors[color.key as keyof typeof currentTheme.colors]}
                           </Code>
@@ -245,149 +232,122 @@ export default colors;`}
               ))}
             </Stack>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
-      {/* Typography */}
-      <Box py={16} bg="cli.bgAlt">
-        <Container maxW="7xl">
-          <Stack gap={12}>
+      {/* Typography Section */}
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Stack gap="var(--space-10)">
             <Box>
-              <HStack mb={4}>
-                <HiCode size={24} color="var(--cli-primary)" />
-                <Heading size="2xl" fontFamily="mono">
-                  Typography
-                </Heading>
-              </HStack>
-              <Text color="cli.fgAlt" fontFamily="mono">
-                Monospace-first. Built for readability in terminals and IDEs.
+              <Text fontSize="var(--text-2xl)" fontFamily="var(--font-display)" fontWeight="var(--font-bold)" mb="var(--space-2)">
+                Typography
+              </Text>
+              <Text color="var(--cli-comment)" fontFamily="var(--font-mono)" fontSize="var(--text-sm)">
+                # Monospace font stack
               </Text>
             </Box>
 
-            <Box className="terminal-window" p={8}>
-              <Stack gap={6}>
-                <Box>
-                  <Text fontSize="xs" color="cli.comment" mb={2}>
-                    Font Family: {currentTheme.fonts.mono}
-                  </Text>
-                  <Text fontSize="5xl" fontFamily="mono" fontWeight="black">
-                    The quick brown fox
-                  </Text>
-                </Box>
-
-                <Box>
-                  <Text fontSize="xs" color="cli.comment" mb={2}>
-                    4XL - Headlines
-                  </Text>
-                  <Text fontSize="4xl" fontFamily="mono" fontWeight="bold">
-                    jumps over the lazy dog
-                  </Text>
-                </Box>
-
-                <Box>
-                  <Text fontSize="xs" color="cli.comment" mb={2}>
-                    2XL - Subheadings
-                  </Text>
-                  <Text fontSize="2xl" fontFamily="mono" fontWeight="semibold">
-                    ABCDEFGHIJKLMNOPQRSTUVWXYZ
-                  </Text>
-                </Box>
-
-                <Box>
-                  <Text fontSize="xs" color="cli.comment" mb={2}>
-                    MD - Body Text
-                  </Text>
-                  <Text fontSize="md" fontFamily="mono">
-                    abcdefghijklmnopqrstuvwxyz 0123456789
-                  </Text>
-                </Box>
-
-                <Box>
-                  <Text fontSize="xs" color="cli.comment" mb={2}>
-                    SM - Code / UI
-                  </Text>
-                  <Code fontFamily="mono" fontSize="sm" bg="cli.bgHighlight" px={3} py={1}>
-                    {'{ } [ ] ( ) < > / \\ | ~ ` ! @ # $ % ^ & * - + = ; : " \' , . ?'}
-                  </Code>
-                </Box>
-              </Stack>
+            <Box className="terminal-window">
+              <Box className="terminal-header">
+                <span className="terminal-button close"></span>
+                <span className="terminal-button minimize"></span>
+                <span className="terminal-button maximize"></span>
+                <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+                  typography.css
+                </Text>
+              </Box>
+              <Box className="terminal-body">
+                <Stack gap="var(--space-4)">
+                  <Box>
+                    <Text fontSize="var(--text-xs)" color="var(--cli-comment)" fontFamily="var(--font-mono)">
+                      // Font Family
+                    </Text>
+                    <Text fontFamily="var(--font-mono)" color="var(--cli-fg)">
+                      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="var(--text-xs)" color="var(--cli-comment)" fontFamily="var(--font-mono)">
+                      // Font Sizes
+                    </Text>
+                    <Stack gap="var(--space-1)">
+                      <Text fontSize="var(--text-6xl)" fontFamily="var(--font-mono)" color="var(--cli-primary)">Extra Large (3.75rem)</Text>
+                      <Text fontSize="var(--text-4xl)" fontFamily="var(--font-mono)" color="var(--cli-secondary)">Heading (2.25rem)</Text>
+                      <Text fontSize="var(--text-2xl)" fontFamily="var(--font-mono)" color="var(--cli-accent)">Subheading (1.5rem)</Text>
+                      <Text fontSize="var(--text-base)" fontFamily="var(--font-mono)" color="var(--cli-fg)">Body (1rem)</Text>
+                      <Text fontSize="var(--text-sm)" fontFamily="var(--font-mono)" color="var(--cli-fgAlt)">Small (0.875rem)</Text>
+                    </Stack>
+                  </Box>
+                </Stack>
+              </Box>
             </Box>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
-      {/* Usage Examples */}
-      <Box py={16}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
-            <Heading size="2xl" fontFamily="mono">
-              Usage Examples
-            </Heading>
+      {/* CSS Variables Documentation */}
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }}>
+        <Box className="container">
+          <Stack gap="var(--space-10)">
+            <Box>
+              <Text fontSize="var(--text-2xl)" fontFamily="var(--font-display)" fontWeight="var(--font-bold)" mb="var(--space-2)">
+                CSS Variables
+              </Text>
+              <Text color="var(--cli-comment)" fontFamily="var(--font-mono)" fontSize="var(--text-sm)">
+                # Complete design system reference
+              </Text>
+            </Box>
 
-            <Grid templateColumns={{ base: "1fr", lg: "repeat(2, 1fr)" }} gap={6}>
-              <Box className="terminal-window" p={6}>
-                <Text fontSize="sm" color="cli.primary" fontFamily="mono" mb={4}>
-                  # CSS Variables
-                </Text>
-                <Code
-                  display="block"
-                  fontFamily="mono"
-                  fontSize="xs"
-                  bg="transparent"
-                  p={0}
-                  whiteSpace="pre"
-                >
-{`.element {
-  background: var(--cli-bg);
-  color: var(--cli-primary);
-  border: 1px solid var(--cli-border);
-  font-family: var(--font-mono);
-}`}
-                </Code>
+            <Grid templateColumns={{ base: "1fr", lg: "repeat(2, 1fr)" }} gap="var(--space-6)">
+              <Box className="terminal-window">
+                <Box className="terminal-header">
+                  <span className="terminal-button close"></span>
+                  <span className="terminal-button minimize"></span>
+                  <span className="terminal-button maximize"></span>
+                  <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                    spacing.css
+                  </Text>
+                </Box>
+                <Box className="terminal-body">
+                  <Stack gap="var(--space-2)" fontFamily="var(--font-mono)" fontSize="var(--text-xs)">
+                    <Text color="var(--cli-comment)">/* Spacing Scale */</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--space-1:</Text> 0.25rem (4px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--space-2:</Text> 0.5rem (8px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--space-4:</Text> 1rem (16px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--space-8:</Text> 2rem (32px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--space-12:</Text> 3rem (48px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--space-16:</Text> 4rem (64px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--space-20:</Text> 5rem (80px)</Text>
+                  </Stack>
+                </Box>
               </Box>
 
-              <Box className="terminal-window" p={6}>
-                <Text fontSize="sm" color="cli-secondary" fontFamily="mono" mb={4}>
-                  # Chakra UI Tokens
-                </Text>
-                <Code
-                  display="block"
-                  fontFamily="mono"
-                  fontSize="xs"
-                  bg="transparent"
-                  p={0}
-                  whiteSpace="pre"
-                >
-{`<Box
-  bg="cli.bg"
-  color="cli.primary"
-  borderColor="cli.border"
-  fontFamily="mono"
-/>`}
-                </Code>
+              <Box className="terminal-window">
+                <Box className="terminal-header">
+                  <span className="terminal-button close"></span>
+                  <span className="terminal-button minimize"></span>
+                  <span className="terminal-button maximize"></span>
+                  <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                    borders.css
+                  </Text>
+                </Box>
+                <Box className="terminal-body">
+                  <Stack gap="var(--space-2)" fontFamily="var(--font-mono)" fontSize="var(--text-xs)">
+                    <Text color="var(--cli-comment)">/* Border Radius */</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--border-radius-sm:</Text> 0.125rem (2px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--border-radius:</Text> 0.25rem (4px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--border-radius-md:</Text> 0.375rem (6px)</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--border-radius-lg:</Text> 0.5rem (8px)</Text>
+                    <Text color="var(--cli-comment)" mt="var(--space-2)">/* Border Width */</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--border-width:</Text> 1px</Text>
+                    <Text><Text as="span" color="var(--cli-cyan)">--border-width-thick:</Text> 2px</Text>
+                  </Stack>
+                </Box>
               </Box>
             </Grid>
           </Stack>
-        </Container>
-      </Box>
-
-      {/* Footer CTA */}
-      <Box
-        py={16}
-        borderTop="2px solid"
-        borderColor="cli.border"
-        bg="cli.bgAlt"
-      >
-        <Container maxW="4xl">
-          <Stack gap={4} textAlign="center">
-            <Text fontSize="2xl" fontFamily="mono" color="cli.primary">
-              $ npm install @ai-agency/cli-theme
-            </Text>
-            <Text color="cli.comment" fontFamily="mono" fontSize="sm">
-              (Coming soon to npm)
-            </Text>
-          </Stack>
-        </Container>
+        </Box>
       </Box>
     </Box>
   )

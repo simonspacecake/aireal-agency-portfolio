@@ -1,277 +1,335 @@
 'use client'
 
-import { Box, Container, Heading, Text, Stack, Grid, Badge, HStack } from "@chakra-ui/react"
-import Hero from "@/components/Hero"
-import ProjectCard from "@/components/ProjectCard"
-import CTAButton from "@/components/CTAButton"
-import type { Project } from "@/types"
+import { Box, Grid, Stack, Text, HStack } from "@chakra-ui/react"
+import Link from "next/link"
+import { HiTerminal, HiFolder } from "react-icons/hi"
 
-const projects: Project[] = [
+const projects = [
   {
-    id: "featured-1",
-    title: "AI-Powered E-Commerce Revolution",
-    category: "E-commerce",
-    description: "Complete platform transformation for a mid-sized retailer. Implemented AI-driven product recommendations, dynamic pricing, and intelligent inventory management. Reduced cart abandonment by 47% and increased average order value by 32%.",
-    technologies: ["Next.js 14", "TypeScript", "OpenAI API", "PostgreSQL", "Stripe", "Vercel"],
+    id: "1",
+    title: "E-Commerce Platform",
+    category: "web-app",
+    description: "AI-powered product recommendations, real-time inventory, dynamic pricing optimization.",
+    tech: ["Next.js 14", "TypeScript", "OpenAI", "PostgreSQL", "Stripe"],
     results: [
-      { metric: "conversion rate increase", value: "47%" },
-      { metric: "avg order value growth", value: "+32%" },
-      { metric: "page load time", value: "< 1.2s" },
+      { metric: "conversion rate", value: "+47%" },
+      { metric: "avg order value", value: "+32%" },
+      { metric: "page load time", value: "1.2s" },
     ],
   },
   {
-    id: "ai-1",
-    title: "Enterprise Content Generation Platform",
-    category: "AI/ML",
-    description: "Built a sophisticated content generation system for a Fortune 500 company. Leverages Claude 4.5 and GPT-4 for multi-format content creation with brand voice consistency, workflow automation, and real-time collaboration.",
-    technologies: ["Python", "LangChain", "Claude API", "GPT-4", "Redis", "React", "AWS"],
+    id: "2",
+    title: "AI Content Engine",
+    category: "ai-ml",
+    description: "Multi-format content generation with Claude & GPT-4. Brand voice consistency, workflow automation.",
+    tech: ["Python", "LangChain", "Claude API", "GPT-4", "Redis"],
     results: [
-      { metric: "content production time", value: "-85%" },
-      { metric: "quality consistency score", value: "9.4/10" },
-      { metric: "cost savings", value: "$180K/year" },
+      { metric: "production time", value: "-85%" },
+      { metric: "quality score", value: "9.4/10" },
+      { metric: "cost savings", value: "$180K/yr" },
     ],
   },
   {
-    id: "saas-1",
-    title: "Real-Time Analytics & Insights Dashboard",
-    category: "SaaS",
-    description: "Enterprise-grade analytics platform with predictive insights, custom reporting, and automated anomaly detection. Processes over 10M events daily with sub-second query response times.",
-    technologies: ["Vue.js", "Python", "TensorFlow", "MongoDB", "WebSockets", "Docker"],
+    id: "3",
+    title: "Analytics Dashboard",
+    category: "saas",
+    description: "Real-time analytics with predictive insights, custom reporting, anomaly detection.",
+    tech: ["Vue.js", "Python", "TensorFlow", "MongoDB", "WebSockets"],
     results: [
-      { metric: "data processing speed", value: "10x faster" },
-      { metric: "user adoption rate", value: "94%" },
-      { metric: "customer satisfaction", value: "4.9/5" },
+      { metric: "processing speed", value: "10x faster" },
+      { metric: "user adoption", value: "94%" },
+      { metric: "satisfaction", value: "4.9/5" },
     ],
   },
   {
-    id: "web-1",
-    title: "Healthcare Patient Portal",
-    category: "Web Application",
-    description: "HIPAA-compliant patient portal with telemedicine capabilities, appointment scheduling, prescription management, and secure messaging. Serves 50,000+ active users monthly.",
-    technologies: ["Next.js", "Node.js", "PostgreSQL", "WebRTC", "Twilio", "AWS"],
+    id: "4",
+    title: "Healthcare Portal",
+    category: "web-app",
+    description: "HIPAA-compliant patient portal with telemedicine, scheduling, secure messaging.",
+    tech: ["Next.js", "Node.js", "PostgreSQL", "WebRTC", "AWS"],
     results: [
       { metric: "patient engagement", value: "+156%" },
-      { metric: "appointment no-shows", value: "-42%" },
-      { metric: "admin workload reduction", value: "65%" },
+      { metric: "no-shows reduction", value: "-42%" },
+      { metric: "admin workload", value: "-65%" },
     ],
   },
   {
-    id: "mobile-1",
-    title: "Fitness Tracking & AI Coach App",
-    category: "Mobile App",
-    description: "Cross-platform fitness application with AI-powered personalized workout plans, nutrition tracking, and virtual coaching. Integrates with wearable devices and uses computer vision for form correction.",
-    technologies: ["React Native", "Python", "TensorFlow", "Firebase", "OpenAI", "Supabase"],
+    id: "5",
+    title: "Fitness AI Coach",
+    category: "mobile",
+    description: "Personalized workout plans, nutrition tracking, computer vision form correction.",
+    tech: ["React Native", "Python", "TensorFlow", "Firebase"],
     results: [
-      { metric: "daily active users growth", value: "+240%" },
-      { metric: "user retention (90-day)", value: "78%" },
-      { metric: "avg session duration", value: "23 mins" },
+      { metric: "DAU growth", value: "+240%" },
+      { metric: "90-day retention", value: "78%" },
+      { metric: "avg session", value: "23 min" },
     ],
   },
   {
-    id: "ai-2",
-    title: "Customer Support AI Assistant",
-    category: "AI/ML",
-    description: "Intelligent customer support system that handles 70% of inquiries autonomously. Features sentiment analysis, multi-language support, and seamless human handoff.",
-    technologies: ["Python", "Claude API", "LangChain", "PostgreSQL", "Next.js", "WebSockets"],
+    id: "6",
+    title: "Support AI Assistant",
+    category: "ai-ml",
+    description: "Autonomous customer support with sentiment analysis, multi-language, human handoff.",
+    tech: ["Python", "Claude API", "LangChain", "PostgreSQL"],
     results: [
-      { metric: "ticket resolution time", value: "-68%" },
-      { metric: "customer satisfaction", value: "4.8/5" },
-      { metric: "support cost savings", value: "$320K/year" },
+      { metric: "resolution time", value: "-68%" },
+      { metric: "satisfaction", value: "4.8/5" },
+      { metric: "cost savings", value: "$320K/yr" },
     ],
   },
 ]
 
-const categories = ["All", "AI/ML", "E-commerce", "SaaS", "Web Application", "Mobile App"]
+const categories = ["all", "ai-ml", "web-app", "saas", "mobile"]
 
 export default function LookbookPage() {
   return (
-    <Box>
-      {/* Hero Section */}
-      <Hero
-        title="Our Work"
-        subtitle="Explore our portfolio of successful projects. Each one showcases our commitment to quality, innovation, and measurable results."
-        primaryCTA={{
-          text: "Start Your Project",
-          href: "/contact",
-        }}
-        secondaryCTA={{
-          text: "See Our Process",
-          href: "/ai-workflow",
-        }}
-      />
-
-      {/* Filters Section */}
+    <Box minH="100vh" background="var(--cli-bg)" color="var(--cli-fg)">
+      {/* Hero */}
       <Box
-        py={8}
-        bg="white"
-        borderBottom="1px solid"
-        borderColor="gray.200"
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderBottom="var(--border-width-thick) solid var(--cli-border)"
+      >
+        <Box className="container">
+          <Stack gap="var(--space-6)" maxW="4xl" mx="auto" textAlign="center">
+            <HStack justify="center" gap="var(--space-2)">
+              <HiFolder size={24} color="var(--cli-primary)" />
+              <Text fontFamily="var(--font-mono)" fontSize="var(--text-sm)" color="var(--cli-comment)">
+                ~/projects/production
+              </Text>
+            </HStack>
+
+            <Text
+              as="h1"
+              fontSize={{ base: "var(--text-4xl)", md: "var(--text-5xl)" }}
+              fontWeight="var(--font-black)"
+              lineHeight="var(--leading-tight)"
+            >
+              <Text as="span" color="var(--cli-primary)">$</Text> git log{" "}
+              <Text as="span" color="var(--cli-secondary)">--projects</Text>
+              <span className="cli-cursor-line"></span>
+            </Text>
+
+            <Text
+              fontSize="var(--text-lg)"
+              color="var(--cli-fgAlt)"
+              fontFamily="var(--font-mono)"
+              lineHeight="var(--leading-relaxed)"
+            >
+              Production deployments. Real results. AI-enhanced development.
+            </Text>
+          </Stack>
+        </Box>
+      </Box>
+
+      {/* Filter Tags */}
+      <Box
+        py="var(--space-4)"
+        background="var(--cli-bgAlt)"
+        borderBottom="var(--border-width) solid var(--cli-border)"
         position="sticky"
         top="73px"
-        zIndex={100}
-        _dark={{ bg: "gray.800", borderColor: "gray.700" }}
+        style={{ zIndex: 'var(--z-sticky)' }}
       >
-        <Container maxW="7xl">
-          <HStack gap={3} flexWrap="wrap" justify="center">
-            {categories.map((category) => (
-              <Badge
-                key={category}
-                size="lg"
-                colorPalette={category === "All" ? "brand" : "gray"}
+        <Box className="container">
+          <HStack gap="var(--space-3)" flexWrap="wrap" justify="center">
+            <Text fontFamily="var(--font-mono)" fontSize="var(--text-sm)" color="var(--cli-comment)">
+              $ filter:
+            </Text>
+            {categories.map((cat) => (
+              <Box
+                key={cat}
+                px="var(--space-3)"
+                py="var(--space-2)"
+                background={cat === "all" ? "var(--cli-primary)" : "var(--cli-bgHighlight)"}
+                color={cat === "all" ? "var(--cli-bg)" : "var(--cli-fg)"}
+                borderRadius="var(--border-radius)"
+                fontSize="var(--text-sm)"
+                fontFamily="var(--font-mono)"
                 cursor="pointer"
-                transition="all 0.2s"
+                transition="all var(--transition-base)"
                 _hover={{
-                  transform: "scale(1.05)",
+                  background: cat === "all" ? "var(--cli-secondary)" : "var(--cli-primary)",
+                  color: "var(--cli-bg)",
                 }}
               >
-                {category}
-              </Badge>
+                {cat}
+              </Box>
             ))}
           </HStack>
-        </Container>
+        </Box>
       </Box>
 
-      {/* Featured Project */}
-      <Box py={{ base: 16, md: 20 }} bg="gray.50" _dark={{ bg: "gray.900" }}>
-        <Container maxW="7xl">
-          <Stack gap={8}>
-            <Box textAlign="center">
-              <Badge colorPalette="accent" size="lg" mb={4}>
-                Featured Project
-              </Badge>
-              <Heading size={{ base: "xl", md: "2xl" }}>
-                {projects[0].title}
-              </Heading>
-            </Box>
-
-            <Box
-              bg="white"
-              _dark={{ bg: "gray.800" }}
-              borderRadius="xl"
-              overflow="hidden"
-              shadow="xl"
-            >
-              <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={0}>
-                <Box
-                  bg="gradient.to-br(brand.100, accent.100)"
-                  p={{ base: 8, md: 12 }}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Box
-                    fontSize="6xl"
-                    fontWeight="black"
-                    bgGradient="linear(to-r, brand.500, accent.500)"
-                    bgClip="text"
-                    textAlign="center"
-                  >
-                    {projects[0].results?.[0].value}
-                    <Text fontSize="xl" color="gray.600" _dark={{ color: "gray.400" }} mt={2}>
-                      {projects[0].results?.[0].metric}
-                    </Text>
-                  </Box>
-                </Box>
-
-                <Box p={{ base: 8, md: 12 }}>
-                  <Stack gap={6}>
-                    <Box>
-                      <Badge colorPalette="brand" size="sm" mb={3}>
-                        {projects[0].category}
-                      </Badge>
-                      <Text fontSize="lg" color="gray.700" _dark={{ color: "gray.300" }}>
-                        {projects[0].description}
-                      </Text>
-                    </Box>
-
-                    {projects[0].results && (
-                      <Stack gap={3}>
-                        <Text fontWeight="semibold" fontSize="sm">Key Results:</Text>
-                        {projects[0].results.map((result, idx) => (
-                          <HStack key={idx}>
-                            <Badge colorPalette="green" size="sm">
-                              {result.value}
-                            </Badge>
-                            <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-                              {result.metric}
-                            </Text>
-                          </HStack>
-                        ))}
-                      </Stack>
-                    )}
-
-                    <Box>
-                      <Text fontWeight="semibold" fontSize="sm" mb={2}>Tech Stack:</Text>
-                      <HStack gap={2} flexWrap="wrap">
-                        {projects[0].technologies.map((tech) => (
-                          <Badge key={tech} size="sm" colorPalette="gray">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </HStack>
-                    </Box>
-                  </Stack>
-                </Box>
-              </Grid>
-            </Box>
-          </Stack>
-        </Container>
-      </Box>
-
-      {/* All Projects Grid */}
-      <Box py={{ base: 16, md: 24 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
-            <Box textAlign="center">
-              <Heading size={{ base: "xl", md: "2xl" }} mb={4}>
-                Case Studies
-              </Heading>
+      {/* Projects Grid */}
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }}>
+        <Box className="container">
+          <Stack gap="var(--space-10)">
+            <Box>
               <Text
-                fontSize={{ base: "md", md: "lg" }}
-                color="gray.600"
-                _dark={{ color: "gray.400" }}
-                maxW="2xl"
-                mx="auto"
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-primary)"
+                mb="var(--space-2)"
               >
-                Deep dive into how we've solved complex challenges across different industries
+                $ cat projects.json | jq '.deployed'
+              </Text>
+              <Text
+                fontSize="var(--text-2xl)"
+                fontWeight="var(--font-bold)"
+                mb="var(--space-2)"
+              >
+                {projects.length} Deployed Projects
+              </Text>
+              <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+                Sorted by impact → latest first
               </Text>
             </Box>
 
             <Grid
               templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
+              gap="var(--space-8)"
             >
-              {projects.slice(1).map((project) => (
-                <ProjectCard key={project.id} project={project} />
+              {projects.map((project) => (
+                <Box
+                  key={project.id}
+                  className="terminal-window"
+                  transition="all var(--transition-base)"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: "var(--shadow-xl)",
+                    borderColor: "var(--cli-primary)",
+                  }}
+                >
+                  <Box className="terminal-header">
+                    <span className="terminal-button close"></span>
+                    <span className="terminal-button minimize"></span>
+                    <span className="terminal-button maximize"></span>
+                    <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                      {project.title}.md
+                    </Text>
+                  </Box>
+                  <Box className="terminal-body">
+                    <Stack gap="var(--space-4)">
+                      {/* Title & Category */}
+                      <Box>
+                        <Text
+                          fontSize="var(--text-xl)"
+                          fontWeight="var(--font-bold)"
+                          mb="var(--space-2)"
+                        >
+                          {project.title}
+                        </Text>
+                        <Text
+                          fontSize="var(--text-xs)"
+                          color="var(--cli-accent)"
+                          fontFamily="var(--font-mono)"
+                        >
+                          category: {project.category}
+                        </Text>
+                      </Box>
+
+                      {/* Description */}
+                      <Text
+                        fontSize="var(--text-sm)"
+                        color="var(--cli-fgAlt)"
+                        lineHeight="var(--leading-relaxed)"
+                      >
+                        {project.description}
+                      </Text>
+
+                      {/* Results */}
+                      <Box>
+                        <Text
+                          fontSize="var(--text-xs)"
+                          color="var(--cli-comment)"
+                          mb="var(--space-2)"
+                          fontFamily="var(--font-mono)"
+                        >
+                          # Results
+                        </Text>
+                        <Grid templateColumns="repeat(3, 1fr)" gap="var(--space-2)">
+                          {project.results.map((result, idx) => (
+                            <Box key={idx} textAlign="center">
+                              <Text
+                                fontSize="var(--text-lg)"
+                                fontWeight="var(--font-bold)"
+                                color="var(--cli-success)"
+                              >
+                                {result.value}
+                              </Text>
+                              <Text fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                                {result.metric}
+                              </Text>
+                            </Box>
+                          ))}
+                        </Grid>
+                      </Box>
+
+                      {/* Tech Stack */}
+                      <Box>
+                        <Text
+                          fontSize="var(--text-xs)"
+                          color="var(--cli-comment)"
+                          mb="var(--space-2)"
+                          fontFamily="var(--font-mono)"
+                        >
+                          # Tech Stack
+                        </Text>
+                        <HStack gap="var(--space-2)" flexWrap="wrap">
+                          {project.tech.map((tech) => (
+                            <Text
+                              key={tech}
+                              fontSize="var(--text-xs)"
+                              px="var(--space-2)"
+                              py="var(--space-1)"
+                              background="var(--cli-bgHighlight)"
+                              borderRadius="var(--border-radius-sm)"
+                              color="var(--cli-cyan)"
+                            >
+                              {tech}
+                            </Text>
+                          ))}
+                        </HStack>
+                      </Box>
+                    </Stack>
+                  </Box>
+                </Box>
               ))}
             </Grid>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <Box
-        py={{ base: 16, md: 20 }}
-        bgGradient="linear(to-r, brand.500, accent.500)"
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        background="var(--cli-bgAlt)"
+        borderTop="var(--border-width-thick) solid var(--cli-border)"
       >
-        <Container maxW="4xl">
-          <Stack gap={6} textAlign="center" color="white">
-            <Heading size={{ base: "xl", md: "2xl" }}>
-              Ready to Create Your Success Story?
-            </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} opacity={0.95}>
-              Let's discuss how we can help you achieve similar results for your business.
+        <Box className="container">
+          <Stack gap="var(--space-6)" textAlign="center" maxW="3xl" mx="auto">
+            <Text
+              fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }}
+              fontWeight="var(--font-bold)"
+            >
+              Your Project Could Be Next
             </Text>
-            <HStack justify="center" gap={4} pt={4}>
-              <CTAButton href="/contact" variant="secondary" size="lg">
-                Get Started
-              </CTAButton>
-              <CTAButton href="/tech-stack" variant="outline" size="lg">
-                Our Technology
-              </CTAButton>
+            <Text fontSize="var(--text-lg)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+              Ready to build something with similar results?
+            </Text>
+            <HStack justify="center" gap="var(--space-4)">
+              <Link href="/contact" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-primary">
+                  $ init --project
+                </Box>
+              </Link>
+              <Link href="/tech-stack" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-outline">
+                  --tech-stack
+                </Box>
+              </Link>
             </HStack>
           </Stack>
-        </Container>
+        </Box>
       </Box>
     </Box>
   )

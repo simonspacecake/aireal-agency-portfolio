@@ -71,6 +71,7 @@
   --leading-relaxed: 1.75;
 
   /* ========== SPACING ========== */
+  /* Base spacing scale */
   --space-1: 0.25rem;      /* 4px */
   --space-2: 0.5rem;       /* 8px */
   --space-3: 0.75rem;      /* 12px */
@@ -84,6 +85,17 @@
   --space-20: 5rem;        /* 80px */
   --space-24: 6rem;        /* 96px */
   --space-32: 8rem;        /* 128px */
+
+  /* Section spacing - more organized vertical rhythm */
+  --section-padding-sm: 3rem;     /* 48px - mobile */
+  --section-padding-md: 4rem;     /* 64px - tablet */
+  --section-padding-lg: 5rem;     /* 80px - desktop */
+
+  /* Content spacing */
+  --content-gap-sm: 1rem;         /* 16px */
+  --content-gap-md: 1.5rem;       /* 24px */
+  --content-gap-lg: 2rem;         /* 32px */
+  --content-gap-xl: 3rem;         /* 48px */
 
   /* ========== BORDERS ========== */
   --border-width: 1px;
@@ -163,6 +175,8 @@ body {
   background: var(--cli-bg);
   color: var(--cli-fg);
   overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
 }
 
 /* ============================================
@@ -289,69 +303,11 @@ pre {
 }
 
 /* ============================================
-   SCANLINES EFFECT
+   SCANLINES EFFECT - DISABLED
+   (Effects removed for better UX)
    ============================================ */
 
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
-.scanlines {
-  position: relative;
-  overflow: hidden;
-}
-
-.scanlines::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, var(--scanline-opacity)),
-    rgba(255, 255, 255, var(--scanline-opacity)) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-  z-index: var(--z-tooltip);
-}
-
-.scanlines::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 20%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, var(--scanline-opacity)),
-    transparent
-  );
-  pointer-events: none;
-  z-index: var(--z-tooltip);
-  animation: scanline 8s linear infinite;
-}
-
-/* ============================================
-   CRT FLICKER EFFECT
-   ============================================ */
-
-@keyframes flicker {
-  0% { opacity: 0.95; }
-  5% { opacity: 1; }
-  10% { opacity: 0.98; }
-  15% { opacity: 1; }
-  100% { opacity: 0.98; }
-}
-
-.crt-effect {
-  animation: flicker var(--crt-flicker-duration) infinite;
-}
+/* Scanlines and CRT effects disabled to improve scrolling and reduce visual noise */
 
 /* ============================================
    TERMINAL WINDOW COMPONENT
@@ -391,7 +347,7 @@ pre {
 .terminal-button.maximize { background: #27c93f; }
 
 .terminal-body {
-  padding: var(--terminal-padding);
+  padding: var(--space-6);
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
@@ -453,8 +409,8 @@ pre {
 .btn {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  padding: var(--space-2) var(--space-4);
+  font-weight: var(--font-bold);
+  padding: var(--space-3) var(--space-6);
   border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
@@ -462,28 +418,54 @@ pre {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  text-decoration: none;
 }
 
 .btn-primary {
   background: var(--cli-primary);
   color: var(--cli-bg);
+  border: var(--border-width-thick) solid var(--cli-primary);
+  box-shadow: 0 4px 12px rgba(189, 147, 249, 0.3);
 }
 
 .btn-primary:hover {
   background: var(--cli-secondary);
+  border-color: var(--cli-secondary);
+  color: var(--cli-bg);
   transform: translateY(-2px);
-  box-shadow: var(--glow-primary);
+  box-shadow: 0 6px 20px rgba(255, 121, 198, 0.4);
+  text-decoration: none;
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--cli-primary);
-  border: var(--border-width-thick) solid var(--cli-primary);
+  color: var(--cli-accent);
+  border: var(--border-width-thick) solid var(--cli-accent);
 }
 
 .btn-outline:hover {
-  background: var(--cli-primary);
+  background: var(--cli-accent);
+  border-color: var(--cli-accent);
   color: var(--cli-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 233, 253, 0.4);
+  text-decoration: none;
+}
+
+.btn-success {
+  background: var(--cli-success);
+  color: var(--cli-bg);
+  border: var(--border-width-thick) solid var(--cli-success);
+  box-shadow: 0 4px 12px rgba(80, 250, 123, 0.3);
+}
+
+.btn-success:hover {
+  background: #50fa7b;
+  border-color: #50fa7b;
+  color: var(--cli-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(80, 250, 123, 0.5);
+  text-decoration: none;
 }
 
 /* ============================================
@@ -564,15 +546,42 @@ pre {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-4);
+  padding: 0 var(--space-6);
 }
 
 @media (min-width: 640px) {
-  .container { padding: 0 var(--space-6); }
+  .container { padding: 0 var(--space-8); }
 }
 
 @media (min-width: 1024px) {
-  .container { padding: 0 var(--space-8); }
+  .container {
+    padding: 0 var(--space-12);
+    max-width: 1400px;
+  }
+}
+
+/* ============================================
+   SECTION SPACING UTILITIES
+   ============================================ */
+
+.section {
+  padding: var(--section-padding-sm) 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--section-padding-md) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--section-padding-lg) 0;
+  }
+}
+
+.section-alt {
+  background: var(--cli-bgAlt);
 }
 
 /* ============================================

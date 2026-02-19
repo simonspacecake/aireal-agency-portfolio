@@ -1,9 +1,9 @@
 'use client'
 
-import { Box, Container, Heading, Text, Stack, Grid } from "@chakra-ui/react"
-import Hero from "@/components/Hero"
+import { Box, Grid, Stack, Text } from "@chakra-ui/react"
+import Link from "next/link"
+import { HiCode, HiChip } from "react-icons/hi"
 import SkillBar from "@/components/SkillBar"
-import CTAButton from "@/components/CTAButton"
 import type { SkillCategory } from "@/types"
 
 const skillCategories: SkillCategory[] = [
@@ -64,145 +64,218 @@ const skillCategories: SkillCategory[] = [
 
 export default function TechStackPage() {
   return (
-    <Box>
-      {/* Hero Section */}
-      <Hero
-        title="Our Technology Expertise"
-        subtitle="We leverage cutting-edge technologies to build scalable, performant, and maintainable applications. Our stack is carefully selected for optimal developer experience and production reliability."
-        primaryCTA={{
-          text: "Discuss Your Project",
-          href: "/contact",
-        }}
-        secondaryCTA={{
-          text: "See Our Work",
-          href: "/lookbook",
-        }}
-      />
+    <Box minH="100vh" background="var(--cli-bg)" color="var(--cli-fg)">
+      {/* Hero */}
+      <Box
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderBottom="var(--border-width-thick) solid var(--cli-border)"
+      >
+        <Box className="container">
+          <Stack gap="var(--space-6)" maxW="4xl" mx="auto" textAlign="center">
+            <Box display="flex" alignItems="center" justifyContent="center" gap="var(--space-2)">
+              <HiChip size={24} color="var(--cli-primary)" />
+              <Text fontFamily="var(--font-mono)" fontSize="var(--text-sm)" color="var(--cli-comment)">
+                ~/tech-stack/skills.json
+              </Text>
+            </Box>
 
-      {/* Introduction */}
-      <Box py={{ base: 16, md: 20 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="5xl">
-          <Stack gap={6} textAlign="center">
-            <Heading size={{ base: "xl", md: "2xl" }}>
-              Modern Stack, Proven Results
-            </Heading>
             <Text
-              fontSize={{ base: "md", md: "lg" }}
-              color="gray.600"
-              _dark={{ color: "gray.400" }}
-              maxW="3xl"
-              mx="auto"
+              as="h1"
+              fontSize={{ base: "var(--text-4xl)", md: "var(--text-5xl)" }}
+              fontWeight="var(--font-black)"
+              lineHeight="var(--leading-tight)"
             >
-              Our technology choices are driven by real-world performance requirements,
-              developer productivity, and long-term maintainability. We stay at the forefront
-              of technology while ensuring stability and support.
+              <Text as="span" color="var(--cli-primary)">$</Text> npm list{" "}
+              <Text as="span" color="var(--cli-secondary)">--depth=all</Text>
+              <span className="cli-cursor-line"></span>
+            </Text>
+
+            <Text
+              fontSize="var(--text-lg)"
+              color="var(--cli-fgAlt)"
+              fontFamily="var(--font-mono)"
+              lineHeight="var(--leading-relaxed)"
+            >
+              Cutting-edge technologies. Proven results. Production-ready code.
             </Text>
           </Stack>
-        </Container>
+        </Box>
+      </Box>
+
+      {/* Introduction */}
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Stack gap="var(--space-6)" textAlign="center" maxW="3xl" mx="auto">
+            <Text
+              fontFamily="var(--font-mono)"
+              fontSize="var(--text-sm)"
+              color="var(--cli-primary)"
+            >
+              $ cat tech-philosophy.md
+            </Text>
+            <Text
+              fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }}
+              fontWeight="var(--font-bold)"
+            >
+              Modern Stack, Proven Results
+            </Text>
+            <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+              # Our technology choices are driven by real-world performance
+              <br />
+              # Developer productivity and long-term maintainability
+              <br />
+              # We stay at the forefront while ensuring stability and support
+            </Text>
+          </Stack>
+        </Box>
       </Box>
 
       {/* Skills Section */}
-      <Box py={{ base: 16, md: 24 }} bg="gray.50" _dark={{ bg: "gray.900" }}>
-        <Container maxW="7xl">
-          <Stack gap={16}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }}>
+        <Box className="container">
+          <Stack gap="var(--space-12)">
             {skillCategories.map((category) => (
               <Box key={category.category}>
-                <Heading size="xl" mb={8} textAlign="center">
-                  {category.category}
-                </Heading>
-                <Box
-                  bg="white"
-                  _dark={{ bg: "gray.800" }}
-                  p={8}
-                  borderRadius="lg"
-                  shadow="md"
+                <Text
+                  fontFamily="var(--font-mono)"
+                  fontSize="var(--text-sm)"
+                  color="var(--cli-primary)"
+                  mb="var(--space-2)"
                 >
-                  <Stack gap={6}>
-                    {category.skills.map((skill) => (
-                      <SkillBar key={skill.name} skill={skill} />
-                    ))}
-                  </Stack>
+                  $ cat ./skills/{category.category.toLowerCase().replace(/ /g, '-')}.json
+                </Text>
+                <Text
+                  fontSize="var(--text-2xl)"
+                  fontWeight="var(--font-bold)"
+                  mb="var(--space-6)"
+                  textAlign="center"
+                >
+                  {category.category}
+                </Text>
+                <Box
+                  className="terminal-window"
+                >
+                  <Box className="terminal-header">
+                    <span className="terminal-button close"></span>
+                    <span className="terminal-button minimize"></span>
+                    <span className="terminal-button maximize"></span>
+                    <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                      {category.category}.txt
+                    </Text>
+                  </Box>
+                  <Box className="terminal-body">
+                    <Stack gap="var(--space-6)">
+                      {category.skills.map((skill) => (
+                        <SkillBar key={skill.name} skill={skill} />
+                      ))}
+                    </Stack>
+                  </Box>
                 </Box>
               </Box>
             ))}
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
       {/* Philosophy Section */}
-      <Box py={{ base: 16, md: 20 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={12} alignItems="center">
-            <Stack gap={6}>
-              <Heading size={{ base: "xl", md: "2xl" }}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap="var(--space-12)" alignItems="start">
+            <Stack gap="var(--space-6)">
+              <Text
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-accent)"
+              >
+                # Philosophy
+              </Text>
+              <Text
+                fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }}
+                fontWeight="var(--font-bold)"
+              >
                 Our Technology Philosophy
-              </Heading>
-              <Text fontSize="lg" color="gray.600" _dark={{ color: "gray.400" }}>
+              </Text>
+              <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
                 We believe in choosing the right tool for the job, not just the newest or most popular one.
                 Our stack is constantly evolving based on production experience and community feedback.
               </Text>
             </Stack>
 
-            <Box
-              bg="gray.50"
-              _dark={{ bg: "gray.900" }}
-              p={8}
-              borderRadius="xl"
-            >
-              <Stack gap={6}>
-                {[
-                  {
-                    title: "Performance First",
-                    desc: "Every technology choice is evaluated for production performance and scalability.",
-                  },
-                  {
-                    title: "Developer Experience",
-                    desc: "We prioritize tools that enhance productivity and code quality.",
-                  },
-                  {
-                    title: "Long-term Support",
-                    desc: "We choose mature, well-supported technologies with active communities.",
-                  },
-                  {
-                    title: "Type Safety",
-                    desc: "TypeScript across the stack for better maintainability and fewer bugs.",
-                  },
-                ].map((point) => (
-                  <Box key={point.title}>
-                    <Text fontWeight="semibold" fontSize="lg" mb={2}>
-                      {point.title}
-                    </Text>
-                    <Text color="gray.600" _dark={{ color: "gray.400" }}>
-                      {point.desc}
-                    </Text>
-                  </Box>
-                ))}
-              </Stack>
+            <Box className="terminal-window">
+              <Box className="terminal-header">
+                <span className="terminal-button close"></span>
+                <span className="terminal-button minimize"></span>
+                <span className="terminal-button maximize"></span>
+                <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                  principles.txt
+                </Text>
+              </Box>
+              <Box className="terminal-body">
+                <Stack gap="var(--space-6)">
+                  {[
+                    {
+                      title: "Performance First",
+                      desc: "Every technology choice is evaluated for production performance and scalability.",
+                    },
+                    {
+                      title: "Developer Experience",
+                      desc: "We prioritize tools that enhance productivity and code quality.",
+                    },
+                    {
+                      title: "Long-term Support",
+                      desc: "We choose mature, well-supported technologies with active communities.",
+                    },
+                    {
+                      title: "Type Safety",
+                      desc: "TypeScript across the stack for better maintainability and fewer bugs.",
+                    },
+                  ].map((point) => (
+                    <Box key={point.title}>
+                      <Text fontWeight="var(--font-semibold)" fontSize="var(--text-base)" mb="var(--space-2)" color="var(--cli-primary)">
+                        # {point.title}
+                      </Text>
+                      <Text color="var(--cli-fgAlt)" fontSize="var(--text-sm)">
+                        {point.desc}
+                      </Text>
+                    </Box>
+                  ))}
+                </Stack>
+              </Box>
             </Box>
           </Grid>
-        </Container>
+        </Box>
       </Box>
 
       {/* CTA Section */}
       <Box
-        py={{ base: 16, md: 20 }}
-        bgGradient="linear(to-r, brand.500, accent.500)"
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderTop="var(--border-width-thick) solid var(--cli-border)"
       >
-        <Container maxW="4xl">
-          <Stack gap={6} textAlign="center" color="white">
-            <Heading size={{ base: "xl", md: "2xl" }}>
+        <Box className="container">
+          <Stack gap="var(--space-6)" textAlign="center" maxW="3xl" mx="auto">
+            <Text
+              fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }}
+              fontWeight="var(--font-bold)"
+            >
               Build with the Best Technology
-            </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} opacity={0.95}>
+            </Text>
+            <Text fontSize="var(--text-lg)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
               Let's discuss which technologies are the best fit for your specific project requirements.
             </Text>
-            <Box pt={4}>
-              <CTAButton href="/contact" variant="secondary" size="lg">
-                Start Your Project
-              </CTAButton>
+            <Box display="flex" alignItems="center" justifyContent="center" gap="var(--space-4)" flexWrap="wrap">
+              <Link href="/contact" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-primary">
+                  $ init --consultation
+                </Box>
+              </Link>
+              <Link href="/lookbook" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-outline">
+                  --view-results
+                </Box>
+              </Link>
             </Box>
           </Stack>
-        </Container>
+        </Box>
       </Box>
     </Box>
   )

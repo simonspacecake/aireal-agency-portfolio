@@ -1,9 +1,8 @@
 'use client'
 
-import { Box, Container, Heading, Text, Stack, Grid, Badge, HStack } from "@chakra-ui/react"
-import Hero from "@/components/Hero"
-import CTAButton from "@/components/CTAButton"
-import { HiUser, HiLightningBolt, HiUserGroup } from "react-icons/hi"
+import { Box, Grid, Stack, Text, HStack } from "@chakra-ui/react"
+import Link from "next/link"
+import { HiUser, HiLightningBolt, HiUserGroup, HiCog } from "react-icons/hi"
 import type { WorkflowStep } from "@/types"
 
 const workflowSteps: WorkflowStep[] = [
@@ -91,183 +90,217 @@ const getStepIcon = (type: string) => {
 const getStepColor = (type: string) => {
   switch (type) {
     case "human":
-      return "accent"
+      return "var(--cli-accent)"
     case "ai":
-      return "brand"
+      return "var(--cli-primary)"
     case "collaborative":
-      return "green"
+      return "var(--cli-success)"
     default:
-      return "gray"
+      return "var(--cli-fgAlt)"
   }
 }
 
 export default function AIWorkflowPage() {
   return (
-    <Box>
-      {/* Hero Section */}
-      <Hero
-        title="Human-in-the-Loop AI Workflow"
-        subtitle="We combine the speed and scalability of AI with the creativity and judgment of expert developers. The result: faster delivery without compromising quality."
-        primaryCTA={{
-          text: "See How It Works",
-          href: "#workflow",
-        }}
-        secondaryCTA={{
-          text: "Start Your Project",
-          href: "/contact",
-        }}
-      />
+    <Box minH="100vh" background="var(--cli-bg)" color="var(--cli-fg)">
+      {/* Hero */}
+      <Box
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderBottom="var(--border-width-thick) solid var(--cli-border)"
+      >
+        <Box className="container">
+          <Stack gap="var(--space-6)" maxW="4xl" mx="auto" textAlign="center">
+            <HStack justify="center" gap="var(--space-2)">
+              <HiCog size={24} color="var(--cli-primary)" />
+              <Text fontFamily="var(--font-mono)" fontSize="var(--text-sm)" color="var(--cli-comment)">
+                ~/workflow/human-in-loop.sh
+              </Text>
+            </HStack>
+
+            <Text
+              as="h1"
+              fontSize={{ base: "var(--text-4xl)", md: "var(--text-5xl)" }}
+              fontWeight="var(--font-black)"
+              lineHeight="var(--leading-tight)"
+            >
+              <Text as="span" color="var(--cli-primary)">$</Text> ./workflow{" "}
+              <Text as="span" color="var(--cli-secondary)">--human-in-loop</Text>
+              <span className="cli-cursor-line"></span>
+            </Text>
+
+            <Text
+              fontSize="var(--text-lg)"
+              color="var(--cli-fgAlt)"
+              fontFamily="var(--font-mono)"
+              lineHeight="var(--leading-relaxed)"
+            >
+              Human expertise + AI velocity. Faster delivery without compromising quality.
+            </Text>
+          </Stack>
+        </Box>
+      </Box>
 
       {/* Introduction */}
-      <Box py={{ base: 16, md: 20 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="5xl">
-          <Stack gap={8} textAlign="center">
-            <Heading size={{ base: "xl", md: "2xl" }}>
-              The Best of Both Worlds
-            </Heading>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Stack gap="var(--space-8)" textAlign="center" maxW="3xl" mx="auto">
             <Text
-              fontSize={{ base: "md", md: "lg" }}
-              color="gray.600"
-              _dark={{ color: "gray.400" }}
-              maxW="3xl"
-              mx="auto"
+              fontFamily="var(--font-mono)"
+              fontSize="var(--text-sm)"
+              color="var(--cli-primary)"
             >
-              AI is a powerful tool, but it's not a replacement for human expertise.
-              Our workflow leverages AI for speed and scale while maintaining human oversight
-              for quality, creativity, and strategic decision-making.
+              $ cat workflow-overview.md
+            </Text>
+            <Text
+              fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }}
+              fontWeight="var(--font-bold)"
+            >
+              The Best of Both Worlds
+            </Text>
+            <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
+              # AI is a powerful tool, not a replacement for human expertise
+              <br />
+              # Our workflow leverages AI for speed and scale
+              <br />
+              # While maintaining human oversight for quality and creativity
             </Text>
 
             <Grid
               templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-              gap={8}
-              pt={8}
+              gap="var(--space-6)"
+              pt="var(--space-8)"
             >
               {[
                 {
                   icon: HiUser,
-                  color: "accent",
+                  color: "var(--cli-accent)",
                   label: "Human-Led",
                   desc: "Strategy, creativity, and final decisions",
                 },
                 {
                   icon: HiLightningBolt,
-                  color: "brand",
+                  color: "var(--cli-primary)",
                   label: "AI-Powered",
                   desc: "Code generation, testing, optimization",
                 },
                 {
                   icon: HiUserGroup,
-                  color: "green",
+                  color: "var(--cli-success)",
                   label: "Collaborative",
                   desc: "Best results from human-AI teamwork",
                 },
               ].map((item) => (
                 <Box
                   key={item.label}
-                  p={6}
-                  bg="gray.50"
-                  _dark={{ bg: "gray.900" }}
-                  borderRadius="lg"
+                  p="var(--space-6)"
+                  background="var(--cli-bg)"
+                  border="var(--border-width) solid var(--cli-border)"
+                  borderRadius="var(--border-radius-lg)"
                 >
                   <Box
                     as={item.icon}
-                    fontSize="4xl"
-                    color={`${item.color}.500`}
-                    mb={3}
+                    fontSize="var(--text-4xl)"
+                    color={item.color}
+                    mb="var(--space-3)"
                     mx="auto"
                     width="fit-content"
                   />
-                  <Heading size="md" mb={2}>
+                  <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" mb="var(--space-2)">
                     {item.label}
-                  </Heading>
-                  <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
+                  </Text>
+                  <Text fontSize="var(--text-sm)" color="var(--cli-fgAlt)">
                     {item.desc}
                   </Text>
                 </Box>
               ))}
             </Grid>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
       {/* Workflow Steps */}
-      <Box id="workflow" py={{ base: 16, md: 24 }} bg="gray.50" _dark={{ bg: "gray.900" }}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }}>
+        <Box className="container">
+          <Stack gap="var(--space-10)">
             <Box textAlign="center">
-              <Badge colorPalette="brand" size="lg" mb={4}>
-                Our Process
-              </Badge>
-              <Heading size={{ base: "xl", md: "2xl" }} mb={4}>
-                8-Step Development Workflow
-              </Heading>
               <Text
-                fontSize={{ base: "md", md: "lg" }}
-                color="gray.600"
-                _dark={{ color: "gray.400" }}
-                maxW="2xl"
-                mx="auto"
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-primary)"
+                mb="var(--space-2)"
               >
+                $ cat workflow-steps.json | jq '.steps[]'
+              </Text>
+              <Text fontSize="var(--text-2xl)" fontWeight="var(--font-bold)" mb="var(--space-2)">
+                8-Step Development Workflow
+              </Text>
+              <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
                 Each project follows this proven workflow, ensuring quality at every stage
               </Text>
             </Box>
 
-            <Stack gap={6}>
-              {workflowSteps.map((step, index) => (
+            <Stack gap="var(--space-6)">
+              {workflowSteps.map((step) => (
                 <Box
                   key={step.id}
-                  bg="white"
-                  _dark={{ bg: "gray.800" }}
-                  p={6}
-                  borderRadius="lg"
+                  background="var(--cli-bgAlt)"
+                  p="var(--space-6)"
+                  borderRadius="var(--border-radius-lg)"
                   borderLeft="4px solid"
-                  borderColor={`${getStepColor(step.type)}.500`}
-                  shadow="sm"
-                  transition="all 0.3s"
+                  borderColor={getStepColor(step.type)}
+                  transition="all var(--transition-base)"
                   _hover={{
-                    shadow: "lg",
                     transform: "translateX(4px)",
+                    boxShadow: "var(--shadow-lg)",
                   }}
                 >
                   <Grid
                     templateColumns={{ base: "1fr", md: "auto 1fr" }}
-                    gap={6}
+                    gap="var(--space-6)"
                     alignItems="center"
                   >
-                    <HStack gap={4}>
+                    <HStack gap="var(--space-4)">
                       <Box
                         w="50px"
                         h="50px"
-                        borderRadius="full"
-                        bg={`${getStepColor(step.type)}.500`}
-                        color="white"
+                        borderRadius="var(--border-radius-full)"
+                        background={getStepColor(step.type)}
+                        color="var(--cli-bg)"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        fontWeight="bold"
-                        fontSize="xl"
+                        fontWeight="var(--font-bold)"
+                        fontSize="var(--text-xl)"
+                        fontFamily="var(--font-mono)"
                       >
                         {step.id}
                       </Box>
                       <Box
                         as={getStepIcon(step.type)}
-                        fontSize="2xl"
-                        color={`${getStepColor(step.type)}.500`}
+                        fontSize="var(--text-2xl)"
+                        color={getStepColor(step.type)}
                         display={{ base: "none", md: "block" }}
                       />
                     </HStack>
 
                     <Box>
-                      <HStack mb={2}>
-                        <Heading size="md">{step.title}</Heading>
-                        <Badge
-                          colorPalette={getStepColor(step.type)}
-                          size="sm"
+                      <HStack mb="var(--space-2)" gap="var(--space-3)" flexWrap="wrap">
+                        <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)">
+                          {step.title}
+                        </Text>
+                        <Text
+                          fontSize="var(--text-xs)"
+                          px="var(--space-2)"
+                          py="var(--space-1)"
+                          background={getStepColor(step.type)}
+                          color="var(--cli-bg)"
+                          borderRadius="var(--border-radius)"
+                          fontFamily="var(--font-mono)"
                         >
                           {step.type}
-                        </Badge>
+                        </Text>
                       </HStack>
-                      <Text color="gray.600" _dark={{ color: "gray.400" }}>
+                      <Text color="var(--cli-fgAlt)" fontSize="var(--text-sm)">
                         {step.description}
                       </Text>
                     </Box>
@@ -276,129 +309,153 @@ export default function AIWorkflowPage() {
               ))}
             </Stack>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
       {/* Technology Stack */}
-      <Box py={{ base: 16, md: 24 }} bg="white" _dark={{ bg: "gray.800" }}>
-        <Container maxW="7xl">
-          <Stack gap={12}>
+      <Box py={{ base: "var(--space-16)", md: "var(--space-20)" }} background="var(--cli-bgAlt)">
+        <Box className="container">
+          <Stack gap="var(--space-10)">
             <Box textAlign="center">
-              <Heading size={{ base: "xl", md: "2xl" }} mb={4}>
-                Technology Stack
-              </Heading>
               <Text
-                fontSize={{ base: "md", md: "lg" }}
-                color="gray.600"
-                _dark={{ color: "gray.400" }}
-                maxW="2xl"
-                mx="auto"
+                fontFamily="var(--font-mono)"
+                fontSize="var(--text-sm)"
+                color="var(--cli-primary)"
+                mb="var(--space-2)"
               >
+                $ ls -la ./ai-tools
+              </Text>
+              <Text fontSize="var(--text-2xl)" fontWeight="var(--font-bold)" mb="var(--space-2)">
+                Technology Stack
+              </Text>
+              <Text fontSize="var(--text-base)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
                 The AI tools and systems that power our development workflow
               </Text>
             </Box>
 
             <Grid
               templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-              gap={8}
+              gap="var(--space-8)"
             >
-              <Box
-                bg="gray.50"
-                _dark={{ bg: "gray.900" }}
-                p={8}
-                borderRadius="lg"
-              >
-                <Heading size="lg" mb={6}>
-                  AI Models
-                </Heading>
-                <Stack gap={4}>
-                  {technologyStack.aiModels.map((tech) => (
-                    <Box key={tech.name}>
-                      <Text fontWeight="semibold" mb={1}>
-                        {tech.name}
-                      </Text>
-                      <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-                        {tech.use}
-                      </Text>
-                    </Box>
-                  ))}
-                </Stack>
+              <Box className="terminal-window">
+                <Box className="terminal-header">
+                  <span className="terminal-button close"></span>
+                  <span className="terminal-button minimize"></span>
+                  <span className="terminal-button maximize"></span>
+                  <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                    ai-models.txt
+                  </Text>
+                </Box>
+                <Box className="terminal-body">
+                  <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" mb="var(--space-4)" color="var(--cli-primary)">
+                    # AI Models
+                  </Text>
+                  <Stack gap="var(--space-4)">
+                    {technologyStack.aiModels.map((tech) => (
+                      <Box key={tech.name}>
+                        <Text fontWeight="var(--font-semibold)" mb="var(--space-1)" color="var(--cli-success)">
+                          → {tech.name}
+                        </Text>
+                        <Text fontSize="var(--text-sm)" color="var(--cli-fgAlt)">
+                          {tech.use}
+                        </Text>
+                      </Box>
+                    ))}
+                  </Stack>
+                </Box>
               </Box>
 
-              <Box
-                bg="gray.50"
-                _dark={{ bg: "gray.900" }}
-                p={8}
-                borderRadius="lg"
-              >
-                <Heading size="lg" mb={6}>
-                  Development Tools
-                </Heading>
-                <Stack gap={4}>
-                  {technologyStack.developmentTools.map((tech) => (
-                    <Box key={tech.name}>
-                      <Text fontWeight="semibold" mb={1}>
-                        {tech.name}
-                      </Text>
-                      <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-                        {tech.use}
-                      </Text>
-                    </Box>
-                  ))}
-                </Stack>
+              <Box className="terminal-window">
+                <Box className="terminal-header">
+                  <span className="terminal-button close"></span>
+                  <span className="terminal-button minimize"></span>
+                  <span className="terminal-button maximize"></span>
+                  <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                    dev-tools.txt
+                  </Text>
+                </Box>
+                <Box className="terminal-body">
+                  <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" mb="var(--space-4)" color="var(--cli-primary)">
+                    # Development Tools
+                  </Text>
+                  <Stack gap="var(--space-4)">
+                    {technologyStack.developmentTools.map((tech) => (
+                      <Box key={tech.name}>
+                        <Text fontWeight="var(--font-semibold)" mb="var(--space-1)" color="var(--cli-success)">
+                          → {tech.name}
+                        </Text>
+                        <Text fontSize="var(--text-sm)" color="var(--cli-fgAlt)">
+                          {tech.use}
+                        </Text>
+                      </Box>
+                    ))}
+                  </Stack>
+                </Box>
               </Box>
 
-              <Box
-                bg="gray.50"
-                _dark={{ bg: "gray.900" }}
-                p={8}
-                borderRadius="lg"
-              >
-                <Heading size="lg" mb={6}>
-                  Quality Gates
-                </Heading>
-                <Stack gap={4}>
-                  {technologyStack.qualityGates.map((tech) => (
-                    <Box key={tech.name}>
-                      <Text fontWeight="semibold" mb={1}>
-                        {tech.name}
-                      </Text>
-                      <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.400" }}>
-                        {tech.use}
-                      </Text>
-                    </Box>
-                  ))}
-                </Stack>
+              <Box className="terminal-window">
+                <Box className="terminal-header">
+                  <span className="terminal-button close"></span>
+                  <span className="terminal-button minimize"></span>
+                  <span className="terminal-button maximize"></span>
+                  <Text ml="var(--space-2)" fontSize="var(--text-xs)" color="var(--cli-fgAlt)">
+                    quality-gates.txt
+                  </Text>
+                </Box>
+                <Box className="terminal-body">
+                  <Text fontSize="var(--text-lg)" fontWeight="var(--font-bold)" mb="var(--space-4)" color="var(--cli-primary)">
+                    # Quality Gates
+                  </Text>
+                  <Stack gap="var(--space-4)">
+                    {technologyStack.qualityGates.map((tech) => (
+                      <Box key={tech.name}>
+                        <Text fontWeight="var(--font-semibold)" mb="var(--space-1)" color="var(--cli-success)">
+                          → {tech.name}
+                        </Text>
+                        <Text fontSize="var(--text-sm)" color="var(--cli-fgAlt)">
+                          {tech.use}
+                        </Text>
+                      </Box>
+                    ))}
+                  </Stack>
+                </Box>
               </Box>
             </Grid>
           </Stack>
-        </Container>
+        </Box>
       </Box>
 
       {/* CTA Section */}
       <Box
-        py={{ base: 16, md: 20 }}
-        bgGradient="linear(to-r, brand.500, accent.500)"
+        py={{ base: "var(--space-16)", md: "var(--space-20)" }}
+        borderTop="var(--border-width-thick) solid var(--cli-border)"
       >
-        <Container maxW="4xl">
-          <Stack gap={6} textAlign="center" color="white">
-            <Heading size={{ base: "xl", md: "2xl" }}>
+        <Box className="container">
+          <Stack gap="var(--space-6)" textAlign="center" maxW="3xl" mx="auto">
+            <Text
+              fontSize={{ base: "var(--text-2xl)", md: "var(--text-3xl)" }}
+              fontWeight="var(--font-bold)"
+            >
               Experience the Future of Development
-            </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} opacity={0.95}>
+            </Text>
+            <Text fontSize="var(--text-lg)" color="var(--cli-fgAlt)" fontFamily="var(--font-mono)">
               See how our AI-enhanced workflow can accelerate your project while maintaining
               the highest quality standards.
             </Text>
-            <HStack justify="center" gap={4} pt={4}>
-              <CTAButton href="/contact" variant="secondary" size="lg">
-                Start Your Project
-              </CTAButton>
-              <CTAButton href="/lookbook" variant="outline" size="lg">
-                View Results
-              </CTAButton>
+            <HStack justify="center" gap="var(--space-4)" flexWrap="wrap">
+              <Link href="/contact" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-primary">
+                  $ init --project
+                </Box>
+              </Link>
+              <Link href="/lookbook" style={{ textDecoration: 'none' }}>
+                <Box className="btn btn-outline">
+                  --view-results
+                </Box>
+              </Link>
             </HStack>
           </Stack>
-        </Container>
+        </Box>
       </Box>
     </Box>
   )
